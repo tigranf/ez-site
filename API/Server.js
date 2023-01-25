@@ -24,3 +24,7 @@ app.use(
 app.listen(expressPort, (_) => {
   console.log(`Express server listening on port ${expressPort}`);
 });
+
+app.post('/api/auth/register', async (req, res) => {
+    console.log(req.body);
+});
