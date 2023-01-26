@@ -5,18 +5,20 @@ import { Paper, Stack, ListItem } from "@mui/material";
 
 let unavailableNames = ["admin", "test", "moderator", "user", "tigran"];
 
-const UsernameInput = ({ clearClick }) => {
+const UsernameInput = ({ clearClick, handleUsername, handleInvalid }) => {
     const [userName, setUserName] = useState("");
     const [color, setColor] = useState("secondary");
 
     useEffect(() => {
         if (unavailableNames.some((name) => name === userName)) {
             setColor("error");
+            handleInvalid(true);
         }
         else {
             setColor("secondary");
+            handleInvalid(false);
         }
-    }, [userName]);
+    }, [handleInvalid, userName]);
 
     useEffect(() => {
         if (clearClick) setUserName("");
@@ -24,6 +26,7 @@ const UsernameInput = ({ clearClick }) => {
 
     const handleChange = (e) => {
         setUserName(e.target.value);
+        handleUsername(e.target.value);
     };
 
     return (

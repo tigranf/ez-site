@@ -26,14 +26,14 @@ const Home = () => {
               minim. Lorem ipsum dolor sit amet, consectetur adip. Lorem ipsum
               dolor sit amet, consectetur.
             </Typography>
-            <Link style={{textDecoration: 'none'}} to='/blogs'>
+            <Link style={{textDecoration: 'none'}} to='/register'>
               <Button
                 variant="contained"
                 color="primary"
                 endIcon={<ArrowForwardSharpIcon />}
                 sx={{ width: "200px", fontSize: "16px" }}
               >
-                LOREM
+                Create Account
               </Button>
             </Link>
           </Box>
