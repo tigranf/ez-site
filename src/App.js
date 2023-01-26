@@ -1,6 +1,6 @@
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { Routes, Route } from "react-router-dom";
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import Home from "./Pages/Home";
 import Register from "./Pages/Register";
@@ -22,7 +22,12 @@ export const UserContext = createContext();
 
 function App() {
   const [user, setUser] = useState(null);
-  console.log("🚀 ~ file: App.js:24 ~ App ~ user", user)
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user) setUser(user);
+  }, [])
+  
 
   return (
     <UserContext.Provider value={{ user, setUser }}>

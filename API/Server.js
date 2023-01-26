@@ -18,9 +18,9 @@ app.use(
   session({
     secret: "SomeSuperDuperLongHardToGuessSecretStringForHashingCookieSessions", // used to sign the cookie
     resave: false, // updates the session even w/ no changes if true
-    saveUninitialized: true, // always creates a session if true
+    saveUninitialized: false, // always creates a session if true
     cookie: {
-      maxAge: 2592000000, //expiration time in milliseconds (30 days usually)
+      maxAge: 24 * 60 * 60 * 1000, //expiration time in milliseconds (2592000000 = 30 days usually)
       secure: false, // if true, only accepts https requests
     },
   })

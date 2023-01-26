@@ -1,11 +1,10 @@
-import { Button } from "@mui/material";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../App";
 
 const AppPage = () => {
-  const [generations, setGenerations] = useState(null);
-  const { user, setUser } = useContext(UserContext);
+//   const [generations, setGenerations] = useState(null);
+  const { user } = useContext(UserContext);
   const navigate = useNavigate();
 
   useEffect(() => {

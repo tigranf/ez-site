@@ -1,19 +1,37 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import PasswordInput from "../Components/PasswordInput";
 import UsernameInput from "../Components/UsernameInput";
 import { UserContext } from "../App";
 import { Typography, Stack, Button, Paper, Box } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 
+let unavailableNames = ["admin", "test", "moderator", "user", "tigran"];
+
 const Login = () => {
   const [clear, setClear] = useState(false);
   const [invalid, setInvalid] = useState(true);
-  console.log("🚀 ~ file: Login.jsx:11 ~ Login ~ invalid", invalid)
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user !== null) navigate("/app");
+  }, [navigate, user]);
+
+  useEffect(() => {
+    if (
+      (password.length > 0 &&
+        (password.length < 8 ||
+          !/\d/.test(password) ||
+          !/[A-Z]/.test(password))) ||
+      (username.length > 0 &&
+        unavailableNames.some((name) => name === username))
+    )
+      setInvalid(true);
+    else if (password.length > 0 && username.length > 0) setInvalid(false);
+  }, [password, username]);
 
   const handleClear = () => {
     setClear(true);
@@ -41,6 +59,7 @@ const Login = () => {
       res = await res.json();
       console.log(res);
       setUser(res.user);
+      localStorage.setItem("user", JSON.stringify(res.user));
       navigate("/app");
     }
   };
@@ -67,19 +86,19 @@ const Login = () => {
       <form
         onSubmit={(event) => {
           event.preventDefault();
-          handleAuthLogin(username, password);
+          if (!invalid) {
+            handleAuthLogin(username, password);
+          }
         }}
       >
         <Stack spacing={2} width={"65%"} mx={"auto"}>
           <UsernameInput
             clearClick={clear}
             handleUsername={(username) => setUsername(username)}
-            handleInvalid={(invalid) => setInvalid(invalid)}
           />
           <PasswordInput
             clearClick={clear}
             handlePassword={(password) => setPassword(password)}
-            handleInvalid={(invalid) => setInvalid(invalid)}
           />
           <Box sx={{ display: "flex", gap: 2, flexDirection: "row-reverse" }}>
             <Button
@@ -88,6 +107,7 @@ const Login = () => {
               fullWidth
               type="submit"
               color="secondary"
+              disabled={invalid}
             >
               Submit
             </Button>

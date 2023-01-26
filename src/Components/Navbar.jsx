@@ -15,7 +15,12 @@ const Navbar = () => {
           <Typography
             variant="h5"
             component="div"
-            sx={{ flexGrow: 1, display: { xs: "none", sm: "block" }, mx: 4, cursor: "pointer" }}
+            sx={{
+              flexGrow: 1,
+              display: { xs: "none", sm: "block" },
+              mx: 4,
+              cursor: "pointer",
+            }}
             onClick={() => navigate("/")}
           >
             EZ Site <RateReviewSharpIcon color="primary" fontSize="large" />
@@ -68,7 +73,12 @@ const Navbar = () => {
           <Typography
             variant="h5"
             component="div"
-            sx={{ flexGrow: 1, display: { xs: "none", sm: "block" }, mx: 4, cursor: "pointer" }}
+            sx={{
+              flexGrow: 1,
+              display: { xs: "none", sm: "block" },
+              mx: 4,
+              cursor: "pointer",
+            }}
             onClick={() => navigate("/")}
           >
             EZ Site <RateReviewSharpIcon color="primary" fontSize="large" />
@@ -108,6 +118,7 @@ const Navbar = () => {
               variant="outlined"
               onClick={() => {
                 setUser(null);
+                localStorage.removeItem("user");
               }}
             >
               Logout

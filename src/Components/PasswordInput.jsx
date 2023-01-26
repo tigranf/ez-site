@@ -18,7 +18,7 @@ const PasswordInput = ({ handlePassword, clearClick }) => {
         ) {
             setColor("error");
         }
-        else {
+        else if (password.length > 0){
             setColor("secondary");
         }
     }, [password]);
