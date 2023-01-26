@@ -19,13 +19,16 @@ const Navbar = () => {
               flexGrow: 1,
               display: { xs: "none", sm: "block" },
               mx: 4,
-              cursor: "pointer",
             }}
-            onClick={() => navigate("/")}
           >
-            EZ Site <RateReviewSharpIcon color="primary" fontSize="large" />
+            <Box
+              sx={{ maxWidth: 120, cursor: "pointer" }}
+              onClick={() => navigate("/")}
+            >
+              EZ Site <RateReviewSharpIcon color="primary" fontSize="large" />
+            </Box>
           </Typography>
-          <Box sx={{ display: "flex", alignItems: "center", gap: 2, mx: 4 }}>
+          <Box sx={{ display: "flex", alignItems: "center", gap: 4, mx: 4 }}>
             {["Home"].map((item) => (
               <NavLink
                 end
@@ -77,13 +80,16 @@ const Navbar = () => {
               flexGrow: 1,
               display: { xs: "none", sm: "block" },
               mx: 4,
-              cursor: "pointer",
             }}
-            onClick={() => navigate("/")}
           >
-            EZ Site <RateReviewSharpIcon color="primary" fontSize="large" />
+            <Box
+              sx={{ maxWidth: 120, cursor: "pointer" }}
+              onClick={() => navigate("/")}
+            >
+              EZ Site <RateReviewSharpIcon color="primary" fontSize="large" />
+            </Box>
           </Typography>
-          <Box sx={{ display: "flex", alignItems: "center", gap: 2, mx: 4 }}>
+          <Box sx={{ display: "flex", alignItems: "center", gap: 4, mx: 4 }}>
             {["App", "Account"].map((item) => (
               <NavLink
                 end

@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import AnimatedPage from "../Components/AnimatedPage";
 
 const NotFound = () => {
   return (
-    <h1>Not Found</h1>
-  )
-}
+    <AnimatedPage>
+      <h1>Not Found</h1>
+    </AnimatedPage>
+  );
+};
 
-export default NotFound
+export default NotFound;

@@ -2,6 +2,7 @@ import { Typography } from "@mui/material";
 import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../App";
+import AnimatedPage from "../Components/AnimatedPage";
 
 const Account = () => {
   const { user } = useContext(UserContext);
@@ -14,9 +15,11 @@ const Account = () => {
   }, [navigate, user]);
 
   return (
-    <Typography variant="h2">
-      Account settings page for {user ? user.username : "NO USER"}
-    </Typography>
+    <AnimatedPage>
+      <Typography variant="h2">
+        Account settings page for {user ? user.username : "NO USER"}
+      </Typography>
+    </AnimatedPage>
   );
 };
 

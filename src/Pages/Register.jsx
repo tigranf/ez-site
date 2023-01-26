@@ -6,6 +6,7 @@ import PasswordInput from "../Components/PasswordInput";
 import UsernameInput from "../Components/UsernameInput";
 import { Typography, Stack, Button, Paper, Box } from "@mui/material";
 import { UserContext } from "../App";
+import AnimatedPage from "../Components/AnimatedPage";
 
 let unavailableNames = ["admin", "test", "moderator", "user", "tigran"];
 
@@ -89,92 +90,97 @@ const Register = () => {
   };
 
   return (
-    <Paper
-      elevation={3}
-      sx={{
-        py: 8,
-        px: 4,
-        maxWidth: 600,
-        width: "100%",
-        height: "100%",
-        mx: "auto",
-        mt: 12,
-      }}
-    >
-      <Typography variant="h4" component="div" textAlign={"center"}>
-        Sign Up Form
-      </Typography>
-      <Typography textAlign={"center"} mt={0.5} mb={2} color="GrayText">
-        Fill in the information below.
-      </Typography>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          // console.dir(e.target);
-          handleAuthRegister(
-            formInputs.username,
-            formInputs.password,
-            formInputs.email
-          );
+    <AnimatedPage>
+      <Paper
+        elevation={3}
+        sx={{
+          py: 8,
+          px: 4,
+          maxWidth: 600,
+          width: "100%",
+          height: "100%",
+          mx: "auto",
+          mt: 12,
         }}
       >
-        <Stack spacing={2} width={"65%"} mx={"auto"}>
-          <UsernameInput
-            clearClick={clear}
-            handleUsername={(username) =>
-              setFormInputs({ ...formInputs, username: username })
-            }
-          />
-          <PasswordInput
-            clearClick={clear}
-            handlePassword={(password) =>
-              setFormInputs({ ...formInputs, password: password })
-            }
-          />
-          <ConfirmInput
-            clearClick={clear}
-            handleConfirmPassword={(confirmPassword) =>
-              setFormInputs({ ...formInputs, confirmPassword: confirmPassword })
-            }
-            password={formInputs.password}
-          />
-          <EmailInput
-            clearClick={clear}
-            handleEmail={(email) =>
-              setFormInputs({ ...formInputs, email: email })
-            }
-          />
-          <Box sx={{ display: "flex", gap: 2, flexDirection: "row-reverse" }}>
-            <Button
-              size="large"
-              variant="text"
-              fullWidth
-              type="submit"
-              color="secondary"
-              disabled={invalid}
-            >
-              Submit
-            </Button>
-            <Button
-              size="large"
-              variant="text"
-              fullWidth
-              type="button"
-              color="error"
-              onClick={handleClear}
-            >
-              Clear
-            </Button>
-          </Box>
-          <Box>
-            <Typography>
-              Already have an account? <Link to="/login">Click here</Link> to
-              sign in.
-            </Typography>
-          </Box>
-        </Stack>
-      </form>
-    </Paper>
+        <Typography variant="h4" component="div" textAlign={"center"}>
+          Sign Up Form
+        </Typography>
+        <Typography textAlign={"center"} mt={0.5} mb={2} color="GrayText">
+          Fill in the information below.
+        </Typography>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            // console.dir(e.target);
+            handleAuthRegister(
+              formInputs.username,
+              formInputs.password,
+              formInputs.email
+            );
+          }}
+        >
+          <Stack spacing={2} width={"65%"} mx={"auto"}>
+            <UsernameInput
+              clearClick={clear}
+              handleUsername={(username) =>
+                setFormInputs({ ...formInputs, username: username })
+              }
+            />
+            <PasswordInput
+              clearClick={clear}
+              handlePassword={(password) =>
+                setFormInputs({ ...formInputs, password: password })
+              }
+            />
+            <ConfirmInput
+              clearClick={clear}
+              handleConfirmPassword={(confirmPassword) =>
+                setFormInputs({
+                  ...formInputs,
+                  confirmPassword: confirmPassword,
+                })
+              }
+              password={formInputs.password}
+            />
+            <EmailInput
+              clearClick={clear}
+              handleEmail={(email) =>
+                setFormInputs({ ...formInputs, email: email })
+              }
+            />
+            <Box sx={{ display: "flex", gap: 2, flexDirection: "row-reverse" }}>
+              <Button
+                size="large"
+                variant="text"
+                fullWidth
+                type="submit"
+                color="secondary"
+                disabled={invalid}
+              >
+                Submit
+              </Button>
+              <Button
+                size="large"
+                variant="text"
+                fullWidth
+                type="button"
+                color="error"
+                onClick={handleClear}
+              >
+                Clear
+              </Button>
+            </Box>
+            <Box>
+              <Typography>
+                Already have an account? <Link to="/login">Click here</Link> to
+                sign in.
+              </Typography>
+            </Box>
+          </Stack>
+        </form>
+      </Paper>
+    </AnimatedPage>
   );
 };
 

@@ -1,5 +1,5 @@
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { createContext, useEffect, useState } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import Home from "./Pages/Home";
@@ -11,6 +11,8 @@ import Navbar from "./Components/Navbar";
 import Footer from "./Components/Footer";
 import AppPage from "./Pages/AppPage";
 import Account from "./Pages/Account";
+import { AnimatePresence } from "framer-motion";
+import { SnackbarProvider } from "notistack";
 
 const darkTheme = createTheme({
   palette: {
@@ -22,30 +24,34 @@ export const UserContext = createContext();
 
 function App() {
   const [user, setUser] = useState(null);
+  const location = useLocation();
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem('user'));
+    const user = JSON.parse(localStorage.getItem("user"));
     if (user) setUser(user);
-  }, [])
-  
+  }, []);
 
   return (
     <UserContext.Provider value={{ user, setUser }}>
       <ThemeProvider theme={darkTheme}>
         <CssBaseline />
-        <Navbar />
-        <div style={{ marginTop: 60 }}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/app" element={<AppPage />} />
-            <Route path="/account" element={<Account />} />
-            <Route path="/error" element={<Error />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </div>
-        <Footer />
+        <SnackbarProvider maxSnack={3} hideIconVariant>
+          <Navbar />
+          <div style={{ marginTop: 60, overflowX: "hidden" }}>
+            <AnimatePresence mode="wait">
+              <Routes key={location.pathname} location={location}>
+                <Route path="/" element={<Home />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/app" element={<AppPage />} />
+                <Route path="/account" element={<Account />} />
+                <Route path="/error" element={<Error />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </AnimatePresence>
+          </div>
+          <Footer />
+        </SnackbarProvider>
       </ThemeProvider>
     </UserContext.Provider>
   );
