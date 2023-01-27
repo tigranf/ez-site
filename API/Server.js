@@ -12,13 +12,14 @@ const LocalStrategy = require("passport-local");
 const { User } = require("./models");
 const { Generation } = require("./models");
 const { getGenData } = require("./GetGenData");
+require("dotenv").config();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(
   session({
-    secret: "SomeSuperDuperLongHardToGuessSecretStringForHashingCookieSessions", // used to sign the cookie
+    secret: process.env.COOKIE_SECRET, // used to sign the cookie
     resave: false, // updates the session even w/ no changes if true
     saveUninitialized: false, // always creates a session if true
     cookie: {

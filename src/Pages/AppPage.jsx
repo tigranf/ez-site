@@ -31,7 +31,6 @@ const AppPage = () => {
             }),
           });
           res = await res.json();
-          console.log(res)
           setGenerations(res.generations);
       }
       fetchData();
