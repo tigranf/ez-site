@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { AppBar, Toolbar, Typography, Box, Button } from "@mui/material";
 import RateReviewSharpIcon from "@mui/icons-material/RateReviewSharp";
 import { UserContext } from "../App";
@@ -7,6 +7,7 @@ import { UserContext } from "../App";
 const Navbar = () => {
   const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
+  const location = useLocation();
 
   if (user === null) {
     return (
@@ -69,7 +70,7 @@ const Navbar = () => {
         </Toolbar>
       </AppBar>
     );
-  } else
+  } else if (location.pathname !== "/app")
     return (
       <AppBar component="nav">
         <Toolbar>
@@ -122,9 +123,26 @@ const Navbar = () => {
             <Button
               color="secondary"
               variant="outlined"
-              onClick={() => {
-                setUser(null);
-                localStorage.removeItem("user");
+              onClick={async () => {
+                let res = await fetch("/api/auth/logout", {
+                  method: "POST",
+                  headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                  },
+                });
+                if (!res.ok) {
+                  if (res.status === 500) {
+                    console.log(res.message, res.status);
+                    throw new Error(res.message);
+                  } else throw new Error("Other error");
+                } else {
+                  res = await res.json();
+                  console.log(res.message);
+                  setUser(null);
+                  localStorage.removeItem("user");
+                  navigate("/");
+                }
               }}
             >
               Logout

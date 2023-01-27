@@ -1,7 +1,9 @@
 import { Paper, Container, Typography } from '@mui/material';
+import { useLocation } from 'react-router-dom';
 
 const Footer = () => {
-    return (
+    const location = useLocation();
+    if (location.pathname !== '/app') return (
         <Paper
             id='footer'
             component="footer"

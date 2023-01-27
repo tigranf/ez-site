@@ -62,7 +62,7 @@ app.listen(expressPort, () => {
   console.log(`Express server listening on port ${expressPort}`);
 });
 
-// * REGISTER USER -------------------------------------------------------------
+// * AUTHENTICATION -------------------------------------------------------
 
 app.post("/api/auth/register", async (req, res) => {
   let { username, password, email } = req.body;
@@ -80,12 +80,18 @@ app.post("/api/auth/register", async (req, res) => {
   });
   res.json({ message: "User registered successfully", user: newUser });
 });
-
-// * LOGIN AUTHENTICATION -------------------------------------------------------
-
 app.post("/api/auth/login", passport.authenticate("local"), (req, res) => {
   console.log(req.session.passport.user);
   res.json({ message: "Login successful", user: req.session.passport.user });
+});
+app.post("/api/auth/logout", (req, res) => {
+  req.logout(function(err) {
+    if (err) {
+      res.status(500).json({ message: "Error logging out" });
+    } else {
+      res.json({ message: "Logout successful" });
+    }
+  });
 });
 
 // * GENERATIONS ----------------------------------------------------------------
