@@ -1,3 +1,4 @@
+import { Typography } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../App";
@@ -18,8 +19,24 @@ const AppPage = () => {
   useEffect(() => {
     if (user !== null) {
       // TODO: fetch user generations
+      const fetchData = async () => {
+          let res = await fetch("/api/gen/read", {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              user,
+            }),
+          });
+          res = await res.json();
+          console.log(res)
+          setGenerations(res.generations);
+      }
+      fetchData();
     }
-  }, [user]);
+  }, [ user]);
 
   const handleGen = async (prompt) => {
     let res = await fetch("/api/gen/create", {
@@ -40,12 +57,14 @@ const AppPage = () => {
     } else {
       res = await res.json();
       console.log(res);
+      setGenerations([...generations, res]);
     }
   };
 
   return (
     <AnimatedPage>
       <PromptBar handleGen={handleGen} />
+      {generations && generations.map((gen, i) => <Typography key={i}>{JSON.stringify(gen)}</Typography>) }
     </AnimatedPage>
   );
 };

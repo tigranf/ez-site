@@ -1,4 +1,5 @@
 // * Variables & Setup * -----------------------------
+
 const express = require("express");
 const app = express();
 const expressPort = 5000;
@@ -27,7 +28,8 @@ app.use(
   })
 );
 
-// PassportJS
+// * PassportJS --------------------------------------------------------------
+
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(
@@ -59,7 +61,8 @@ app.listen(expressPort, () => {
   console.log(`Express server listening on port ${expressPort}`);
 });
 
-// REGISTER USER
+// * REGISTER USER -------------------------------------------------------------
+
 app.post("/api/auth/register", async (req, res) => {
   let { username, password, email } = req.body;
   let hashedPass = await bcrypt.hash(password, 10);
@@ -77,22 +80,33 @@ app.post("/api/auth/register", async (req, res) => {
   res.json({ message: "User registered successfully", user: newUser });
 });
 
-// LOGIN AUTHENTICATION
+// * LOGIN AUTHENTICATION -------------------------------------------------------
+
 app.post("/api/auth/login", passport.authenticate("local"), (req, res) => {
   console.log(req.session.passport.user);
   res.json({ message: "Login successful", user: req.session.passport.user });
 });
 
-// GENERATIONS
+// * GENERATIONS ----------------------------------------------------------------
+
 app.post("/api/gen/create", async (req, res) => {
   const { user, prompt } = req.body;
   let data = await getGenData(prompt);
   console.log("🚀 ~ file: Server.js:90 ~ app.post ~ data", data);
   let newGen = await Generation.create({
     userId: user.id,
+    title: prompt,
     genObject: data,
     createdAt: new Date(),
     updatedAt: new Date(),
   });
   res.json({ message: "Created new generation", generation: newGen });
+});
+
+app.post("/api/gen/read", async (req, res) => {
+  const { user } = req.body;
+  if (user) {
+    let data = await Generation.findAll({ where: { userId: user.id } });
+    res.json({ generations: data });
+  } else res.status(404);
 });

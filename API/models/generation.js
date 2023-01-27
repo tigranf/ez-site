@@ -19,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Generation.init({
     userId: DataTypes.INTEGER,
+    title: DataTypes.STRING,
     genObject: DataTypes.JSONB
   }, {
     sequelize,

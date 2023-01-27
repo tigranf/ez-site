@@ -19,6 +19,10 @@ module.exports = {
         },
         type: Sequelize.INTEGER
       },
+      title: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
       genObject: {
         allowNull: false,
         type: Sequelize.JSONB
