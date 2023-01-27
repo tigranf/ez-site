@@ -96,7 +96,7 @@ const Register = () => {
         sx={{
           py: 8,
           px: 4,
-          maxWidth: 600,
+          maxWidth: 650,
           width: "100%",
           height: "100%",
           mx: "auto",
@@ -104,10 +104,10 @@ const Register = () => {
         }}
       >
         <Typography variant="h4" component="div" textAlign={"center"}>
-          Sign Up Form
+          Create a Website with Ease!
         </Typography>
         <Typography textAlign={"center"} mt={0.5} mb={2} color="GrayText">
-          Fill in the information below.
+          Fill in the information below to create your account.
         </Typography>
         <form
           onSubmit={(e) => {
@@ -158,7 +158,7 @@ const Register = () => {
                 color="secondary"
                 disabled={invalid}
               >
-                Submit
+                Sign Up
               </Button>
               <Button
                 size="large"
@@ -173,8 +173,13 @@ const Register = () => {
             </Box>
             <Box>
               <Typography>
-                Already have an account? <Link to="/login">Click here</Link> to
-                sign in.
+                Already have an account?{" "}
+                <Link to="/login" style={{ textDecoration: "none" }}>
+                  <Button variant="text" size="small">
+                    Click here
+                  </Button>
+                </Link>{" "}
+                to sign in.
               </Typography>
             </Box>
           </Stack>

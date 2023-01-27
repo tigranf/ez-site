@@ -10,6 +10,7 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const { User } = require("./models");
 const { Generation } = require("./models");
+const { getGenData } = require("./GetGenData");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -80,4 +81,18 @@ app.post("/api/auth/register", async (req, res) => {
 app.post("/api/auth/login", passport.authenticate("local"), (req, res) => {
   console.log(req.session.passport.user);
   res.json({ message: "Login successful", user: req.session.passport.user });
+});
+
+// GENERATIONS
+app.post("/api/gen/create", async (req, res) => {
+  const { user, prompt } = req.body;
+  let data = await getGenData(prompt);
+  console.log("🚀 ~ file: Server.js:90 ~ app.post ~ data", data);
+  let newGen = await Generation.create({
+    userId: user.id,
+    genObject: data,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  });
+  res.json({ message: "Created new generation", generation: newGen });
 });

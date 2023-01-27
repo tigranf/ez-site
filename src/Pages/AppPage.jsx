@@ -1,10 +1,11 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../App";
 import AnimatedPage from "../Components/AnimatedPage";
+import PromptBar from "../Components/PromptBar";
 
 const AppPage = () => {
-  //   const [generations, setGenerations] = useState(null);
+  const [generations, setGenerations] = useState(null);
   const { user } = useContext(UserContext);
   const navigate = useNavigate();
 
@@ -20,16 +21,31 @@ const AppPage = () => {
     }
   }, [user]);
 
+  const handleGen = async (prompt) => {
+    let res = await fetch("/api/gen/create", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        user,
+        prompt: prompt,
+      }),
+    });
+    if (!res.ok) {
+      if (res.status === 401) {
+        throw new Error("Unauthorized");
+      } else throw new Error("Other error");
+    } else {
+      res = await res.json();
+      console.log(res);
+    }
+  };
+
   return (
     <AnimatedPage>
-      <h1>
-        USER:
-        <br /> {JSON.stringify(user)}
-      </h1>
-      <h1>
-        GENS:
-        <br /> {JSON.stringify({ gens: [] })}
-      </h1>
+      <PromptBar handleGen={handleGen} />
     </AnimatedPage>
   );
 };

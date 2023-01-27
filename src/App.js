@@ -35,7 +35,13 @@ function App() {
     <UserContext.Provider value={{ user, setUser }}>
       <ThemeProvider theme={darkTheme}>
         <CssBaseline />
-        <SnackbarProvider maxSnack={3} hideIconVariant>
+        <SnackbarProvider
+          maxSnack={3}
+          autoHideDuration={3333}
+          hideIconVariant
+          dense
+          preventDuplicate
+        >
           <Navbar />
           <div style={{ marginTop: 60, overflowX: "hidden" }}>
             <AnimatePresence mode="wait">

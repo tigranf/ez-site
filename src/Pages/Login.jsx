@@ -16,7 +16,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
 
   const { user, setUser } = useContext(UserContext);
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -57,17 +57,17 @@ const Login = () => {
     });
     if (!res.ok) {
       if (res.status === 401) {
-        console.log("Unauthorized");
-        enqueueSnackbar("Incorrect username or password. Try again.", {
-          variant: "error",
-          anchorOrigin: { horizontal: "center", vertical: "top" },
-          preventDuplicate: true,
-          TransitionComponent: Zoom
-        });
+        enqueueSnackbar(
+          "Incorrect username and/or password. Please try again.",
+          {
+            variant: "error",
+            anchorOrigin: { horizontal: "center", vertical: "top" },
+            TransitionComponent: Zoom,
+          }
+        );
       } else throw new Error("Other error");
     } else {
       res = await res.json();
-      console.log(res);
       setUser(res.user);
       localStorage.setItem("user", JSON.stringify(res.user));
       navigate("/app");
@@ -81,7 +81,7 @@ const Login = () => {
         sx={{
           py: 8,
           px: 4,
-          maxWidth: 600,
+          maxWidth: 650,
           width: "100%",
           height: "100%",
           mx: "auto",
@@ -89,10 +89,10 @@ const Login = () => {
         }}
       >
         <Typography variant="h4" component="div" textAlign={"center"}>
-          Log In Form
+          Welcome back!
         </Typography>
         <Typography textAlign={"center"} mt={0.5} mb={2} color="GrayText">
-          Fill in the information below.
+          Fill in the information below to continue.
         </Typography>
         <form
           onSubmit={(event) => {
@@ -120,7 +120,7 @@ const Login = () => {
                 color="secondary"
                 disabled={invalid}
               >
-                Submit
+                Log In
               </Button>
               <Button
                 size="lg"
@@ -135,8 +135,11 @@ const Login = () => {
             </Box>
             <Box>
               <Typography>
-                Don't have an account? <Link to="/register">Click here</Link> to
-                create one.
+                Don't have an account?{" "}
+                <Link to="/register" style={{ textDecoration: "none" }}>
+                  <Button variant="text" size="small">Click here</Button>
+                </Link>{" "}
+                to create one.
               </Typography>
             </Box>
           </Stack>
