@@ -64,7 +64,7 @@ const AppPage = () => {
   let content;
   if (selectedGen === 0) {
     content = (
-      <Paper variant="outlined" sx={{ mx: 4, mb: 6 }}>
+      <Paper variant="outlined" sx={{ mx: 4, my: 6 }}>
         <PromptBar handleGen={handleGen} />
       </Paper>
     );

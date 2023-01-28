@@ -35,9 +35,37 @@ function ResponsiveDrawer(props) {
   };
 
   const drawer = (
-    <div style={{ display: "flex", flexDirection: "column", height: "100%", transition: 'all' }}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
+        transition: "all",
+      }}
+    >
+      <Toolbar />
       <List>
-        <ListItem disablePadding sx={{filter: 'brightness(75%)', ':hover': {filter: 'brightness(105%)'}}}>
+        <ListItem
+          disablePadding
+          sx={{
+            filter: "brightness(75%)",
+            ":hover": { filter: "brightness(105%)" },
+          }}
+        >
+          <ListItemButton>
+            <ListItemIcon>
+              <LightModeIcon />
+            </ListItemIcon>
+            <ListItemText primary={"Toggle Theme"} />
+          </ListItemButton>
+        </ListItem>
+        <ListItem
+          disablePadding
+          sx={{
+            filter: "brightness(75%)",
+            ":hover": { filter: "brightness(105%)" },
+          }}
+        >
           <ListItemButton
             onClick={() => {
               navigate("/account");
@@ -49,15 +77,13 @@ function ResponsiveDrawer(props) {
             <ListItemText primary={"Account Settings"} />
           </ListItemButton>
         </ListItem>
-        <ListItem disablePadding sx={{filter: 'brightness(75%)', ':hover': {filter: 'brightness(105%)'}}}>
-          <ListItemButton>
-            <ListItemIcon>
-              <LightModeIcon />
-            </ListItemIcon>
-            <ListItemText primary={"Toggle Theme"} />
-          </ListItemButton>
-        </ListItem>
-        <ListItem disablePadding sx={{filter: 'brightness(75%)', ':hover': {filter: 'brightness(105%)'}}}>
+        <ListItem
+          disablePadding
+          sx={{
+            filter: "brightness(75%)",
+            ":hover": { filter: "brightness(105%)" },
+          }}
+        >
           <ListItemButton
             onClick={async () => {
               let res = await fetch("/api/auth/logout", {
@@ -92,13 +118,14 @@ function ResponsiveDrawer(props) {
       <ListItem
         disablePadding
         sx={{
-          filter: "brightness(120%)",
-          color: "#CA91D8",
+          filter: "brightness(110%)",
+          color: "hsl(203, 91%, 62%)",
           transition: "all",
           ":hover": {
             filter: "brightness(100%)",
-            outline: "1px solid gray",
-            outlineOffset: "-2px",
+            outline: "1px solid hsl(203, 91%, 62%)",
+            outlineOffset: "-1px",
+            borderRadius: 2,
           },
         }}
       >
@@ -109,28 +136,57 @@ function ResponsiveDrawer(props) {
           }}
         >
           <ListItemIcon>
-            <AddIcon color="secondary" />
+            <AddIcon color="info" />
           </ListItemIcon>
-          <ListItemText primary={"Generate Site"} />
+          <ListItemText
+            primaryTypographyProps={{ variant: "h6" }}
+            primary={"Generate Site"}
+          />
         </ListItemButton>
       </ListItem>
-      <List>
-        {generations &&
-          generations.map((gen, i) => (
-            <ListItem key={i} disablePadding>
-              <ListItemButton
-                onClick={() => {
-                  setSelectedGen(gen.id);
-                }}
-              >
-                <ListItemIcon>
-                  <WebAssetIcon />
-                </ListItemIcon>
-                <ListItemText primary={gen.title} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-      </List>
+      <Box
+        sx={{
+          overflowY: "auto",
+          "&::-webkit-scrollbar": {
+            width: "0.4em",
+          },
+          "&::-webkit-scrollbar-track": {
+            boxShadow: "inset 0 0 6px black",
+            webkitBoxShadow: "inset 0 0 6px black",
+          },
+          "&::-webkit-scrollbar-thumb": {
+            backgroundColor: "hsl(0,0%,28%)",
+            outline: "1px solid hsl(0,0%,28%)",
+            outlineOffset: "-1px",
+          },
+        }}
+      >
+        <List>
+          {generations &&
+            generations.map((gen, i) => (
+              <ListItem key={i} disablePadding>
+                <ListItemButton
+                  onClick={() => {
+                    setSelectedGen(gen.id);
+                  }}
+                >
+                  <ListItemIcon>
+                    <WebAssetIcon />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={gen.title}
+                    sx={{
+                      display: "-webkit-box",
+                      WebkitLineClamp: 3,
+                      WebkitBoxOrient: "vertical",
+                      overflow: "hidden",
+                    }}
+                  />
+                </ListItemButton>
+              </ListItem>
+            ))}
+        </List>
+      </Box>
     </div>
   );
 
@@ -142,10 +198,7 @@ function ResponsiveDrawer(props) {
       <CssBaseline />
       <AppBar
         position="fixed"
-        sx={{
-          width: { md: `calc(100% - ${drawerWidth}px)` },
-          ml: { md: `${drawerWidth}px` },
-        }}
+        sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
       >
         <Toolbar>
           <IconButton
@@ -157,8 +210,8 @@ function ResponsiveDrawer(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h5" noWrap component="div" mr={"auto"}>
-            Welcome {user?.username || ""}.
+          <Typography variant="h4" noWrap component="div" mr={"auto"}>
+            Welcome, {user?.username || ""}.
           </Typography>
           <Box sx={{ cursor: "pointer" }} onClick={() => navigate("/")}>
             <Typography

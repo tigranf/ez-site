@@ -40,7 +40,7 @@ const Home = () => {
               <Link style={{ textDecoration: "none" }} to="/register">
                 <Button
                   variant="contained"
-                  color="primary"
+                  color="info"
                   endIcon={<ArrowForwardSharpIcon />}
                   fullWidth
                   sx={{ fontSize: "16px" }}
