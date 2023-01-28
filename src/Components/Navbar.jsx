@@ -1,18 +1,29 @@
 import { useContext } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
-import { AppBar, Toolbar, Typography, Box, Button } from "@mui/material";
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Box,
+  Button,
+  IconButton,
+  useTheme,
+} from "@mui/material";
 import RateReviewSharpIcon from "@mui/icons-material/RateReviewSharp";
-import { UserContext } from "../App";
+import { UserContext, ColorModeContext } from "../App";
+import { Brightness3, Brightness7 } from "@mui/icons-material";
 
 const Navbar = () => {
+  const theme = useTheme();
+  const colorMode = useContext(ColorModeContext);
   const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
   const location = useLocation();
 
   if (user === null) {
     return (
-      <AppBar component="nav">
-        <Toolbar>
+      <AppBar component="nav" color="default">
+        <Toolbar variant="dense">
           <Typography
             variant="h5"
             component="div"
@@ -38,12 +49,12 @@ const Navbar = () => {
                 style={({ isActive }) => {
                   return isActive
                     ? {
-                        color: "Highlight",
+                        color: "blueviolet",
                         textDecoration: "none",
                         scale: "1.2",
                       }
                     : {
-                        color: "ButtonHighlight",
+                        color: "inherit",
                         textDecoration: "none",
                       };
                 }}
@@ -66,14 +77,21 @@ const Navbar = () => {
             >
               Login
             </Button>
+            <IconButton onClick={colorMode.toggleColorMode}>
+              {theme.palette.mode === "dark" ? (
+                <Brightness7 />
+              ) : (
+                <Brightness3 />
+              )}
+            </IconButton>
           </Box>
         </Toolbar>
       </AppBar>
     );
   } else if (location.pathname !== "/app")
     return (
-      <AppBar component="nav">
-        <Toolbar>
+      <AppBar component="nav" color="default">
+        <Toolbar variant="dense">
           <Typography
             variant="h5"
             component="div"
@@ -91,7 +109,7 @@ const Navbar = () => {
             </Box>
           </Typography>
           <Box sx={{ display: "flex", alignItems: "center", gap: 4, mx: 4 }}>
-            {["App", "Account"].map((item) => (
+            {["Home", "App", "Account"].map((item) => (
               <NavLink
                 end
                 to={item === "Home" ? "/" : "/" + item.toLowerCase()}
@@ -99,12 +117,12 @@ const Navbar = () => {
                 style={({ isActive }) => {
                   return isActive
                     ? {
-                        color: "Highlight",
+                        color: "blueviolet",
                         textDecoration: "none",
                         scale: "1.2",
                       }
                     : {
-                        color: "ButtonHighlight",
+                        color: "inherit",
                         textDecoration: "none",
                       };
                 }}
@@ -147,6 +165,13 @@ const Navbar = () => {
             >
               Logout
             </Button>
+            <IconButton onClick={colorMode.toggleColorMode}>
+              {theme.palette.mode === "dark" ? (
+                <Brightness7 />
+              ) : (
+                <Brightness3 />
+              )}
+            </IconButton>
           </Box>
         </Toolbar>
       </AppBar>

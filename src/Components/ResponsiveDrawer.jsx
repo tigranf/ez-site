@@ -12,15 +12,16 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
 import SettingsIcon from "@mui/icons-material/Settings";
-import LightModeIcon from "@mui/icons-material/LightMode";
 import RateReviewSharpIcon from "@mui/icons-material/RateReviewSharp";
 import WebAssetIcon from "@mui/icons-material/WebAsset";
 import MeetingRoomIcon from "@mui/icons-material/MeetingRoom";
 import AddIcon from "@mui/icons-material/Add";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import { UserContext } from "../App";
+import { ColorModeContext, UserContext } from "../App";
 import { useNavigate } from "react-router-dom";
+import { useTheme } from "@mui/material";
+import { Brightness3, Brightness7 } from "@mui/icons-material";
 
 const drawerWidth = 240;
 
@@ -28,6 +29,8 @@ function ResponsiveDrawer(props) {
   const { window, children, generations, setSelectedGen } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const { user, setUser } = React.useContext(UserContext);
+  const colorMode = React.useContext(ColorModeContext);
+  const theme = useTheme();
   const navigate = useNavigate();
 
   const handleDrawerToggle = () => {
@@ -52,11 +55,11 @@ function ResponsiveDrawer(props) {
             ":hover": { filter: "brightness(105%)" },
           }}
         >
-          <ListItemButton>
+          <ListItemButton onClick={colorMode.toggleColorMode}>
             <ListItemIcon>
-              <LightModeIcon />
+              { theme.palette.mode === 'dark' ? <Brightness7 /> : <Brightness3 /> }
             </ListItemIcon>
-            <ListItemText primary={"Toggle Theme"} />
+            <ListItemText primary={theme.palette.mode === 'dark' ? "Light Theme" : "Dark Theme"} />
           </ListItemButton>
         </ListItem>
         <ListItem
@@ -198,9 +201,11 @@ function ResponsiveDrawer(props) {
       <CssBaseline />
       <AppBar
         position="fixed"
+        color="default"
+        variant="outlined"
         sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
       >
-        <Toolbar>
+        <Toolbar variant="dense">
           <IconButton
             color="inherit"
             aria-label="open drawer"

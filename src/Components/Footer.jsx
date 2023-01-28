@@ -8,14 +8,13 @@ const Footer = () => {
             id='footer'
             component="footer"
             square
-            variant="elevation"
-            sx={{position: 'absolute', bottom: 0, right:0, left: 0}}
+            variant="outlined"
+            sx={{mt: 'auto'}}
         >
             <Container maxWidth="lg">
-                <Typography variant="body1" color="#fff" sx={{
+                <Typography variant="body1" sx={{
                     textAlign: 'center',
-                    textShadow: '0 3px 3px #000',
-                    filter: 'brightness(400%)',
+                    textShadow: '0 1px 1px #000',
                     py: '20px',
                     mt: '20px',
                 }}>

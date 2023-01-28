@@ -2,7 +2,7 @@ import * as React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import { CardActionArea, Divider } from "@mui/material";
+import { CardActionArea, CardMedia, Divider } from "@mui/material";
 
 export default function Suggestions({ setPrompt }) {
   return (
@@ -18,6 +18,12 @@ export default function Suggestions({ setPrompt }) {
             Type a brief but detailed description of your website idea.
           </Typography>
         </CardContent>
+        <CardMedia
+          component="img"
+          height="140"
+          image="/images/low-poly-grid-haikei.svg"
+          alt="low poly vector graphic"
+        />
       </Card>
       <Divider variant="fullWidth" />
       <Card>
@@ -40,7 +46,7 @@ export default function Suggestions({ setPrompt }) {
           </CardContent>
         </CardActionArea>
       </Card>
-      <Divider variant="fullWidth"/>
+      <Divider variant="fullWidth" />
       <Card>
         <CardActionArea
           onClick={(e) => {
@@ -62,7 +68,7 @@ export default function Suggestions({ setPrompt }) {
           </CardContent>
         </CardActionArea>
       </Card>
-      <Divider variant="fullWidth"/>
+      <Divider variant="fullWidth" />
       <Card>
         <CardActionArea
           onClick={(e) => {
@@ -84,7 +90,7 @@ export default function Suggestions({ setPrompt }) {
           </CardContent>
         </CardActionArea>
       </Card>
-      <Divider variant="fullWidth"/>
+      <Divider variant="fullWidth" />
       <Card>
         <CardActionArea
           onClick={(e) => {
@@ -106,7 +112,7 @@ export default function Suggestions({ setPrompt }) {
           </CardContent>
         </CardActionArea>
       </Card>
-      <Divider variant="fullWidth"/>
+      <Divider variant="fullWidth" />
       <Card>
         <CardActionArea
           onClick={(e) => {
@@ -127,7 +133,7 @@ export default function Suggestions({ setPrompt }) {
           </CardContent>
         </CardActionArea>
       </Card>
-      <Divider variant="fullWidth"/>
+      <Divider variant="fullWidth" />
     </>
   );
 }

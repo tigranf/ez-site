@@ -1,6 +1,6 @@
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { Routes, Route, useLocation } from "react-router-dom";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useMemo, useState } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import Home from "./Pages/Home";
 import Register from "./Pages/Register";
@@ -14,13 +14,8 @@ import Account from "./Pages/Account";
 import { AnimatePresence } from "framer-motion";
 import { SnackbarProvider } from "notistack";
 
-const darkTheme = createTheme({
-  palette: {
-    mode: "dark",
-  },
-});
-
 export const UserContext = createContext();
+export const ColorModeContext = createContext({ toggleColorMode: () => {} });
 
 function App() {
   const [user, setUser] = useState(null);
@@ -33,17 +28,17 @@ function App() {
 
   return (
     <UserContext.Provider value={{ user, setUser }}>
-      <ThemeProvider theme={darkTheme}>
-        <CssBaseline />
-        <SnackbarProvider
-          maxSnack={3}
-          autoHideDuration={3333}
-          hideIconVariant
-          dense
-          preventDuplicate
-        >
+      <CssBaseline />
+      <SnackbarProvider
+        maxSnack={3}
+        autoHideDuration={3333}
+        hideIconVariant
+        dense
+        preventDuplicate
+      >
+        <div style={{minHeight: 'calc(100vh - 0px)', display: 'flex', flexDirection: 'column'}}>
           <Navbar />
-          <div style={{ marginTop: 60, overflowX: "hidden" }}>
+          <div style={{ marginTop: 48, overflowX: "hidden" }}>
             <AnimatePresence mode="wait">
               <Routes key={location.pathname} location={location}>
                 <Route path="/" element={<Home />} />
@@ -57,10 +52,38 @@ function App() {
             </AnimatePresence>
           </div>
           <Footer />
-        </SnackbarProvider>
-      </ThemeProvider>
+        </div>
+      </SnackbarProvider>
     </UserContext.Provider>
   );
 }
+export default function ToggleColorMode() {
+  const [mode, setMode] = useState("dark");
+  const colorMode = useMemo(
+    () => ({
+      toggleColorMode: () => {
+        setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
+      },
+    }),
+    []
+  );
 
-export default App;
+  const theme = useMemo(
+    () =>
+      createTheme({
+        palette: {
+          mode,
+        },
+      }),
+    [mode]
+  );
+
+  return (
+    <ColorModeContext.Provider value={colorMode}>
+      <ThemeProvider theme={theme}>
+        <App />
+      </ThemeProvider>
+    </ColorModeContext.Provider>
+  );
+}
+// export default App;

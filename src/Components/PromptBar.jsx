@@ -1,6 +1,6 @@
 import SmartToyIcon from "@mui/icons-material/SmartToy";
 import SendIcon from "@mui/icons-material/Send";
-import ClearIcon from '@mui/icons-material/Clear';
+import ClearIcon from "@mui/icons-material/Clear";
 import { IconButton, InputAdornment, TextField } from "@mui/material";
 import { useState } from "react";
 import Suggestions from "./Suggestions";
@@ -46,17 +46,13 @@ export default function PromptBar({ handleGen }) {
               ) : (
                 <InputAdornment
                   position="start"
-                  sx={{ alignItems: "flex-end", translate: '0 10px' }}
+                  sx={{ alignItems: "flex-end" }}
                 >
-                  <IconButton
-                    color="error"
-                    size="large"
-                    sx={{ borderRadius: 1, filter: 'contrast(50%)' }}
-                    type="button"
-                    onClick={() => setPrompt('')}
-                  >
-                    <ClearIcon />
-                  </IconButton>
+                  <ClearIcon
+                    color="disabled"
+                    onClick={() => setPrompt("")}
+                    sx={{ cursor: "pointer" }}
+                  />
                 </InputAdornment>
               ),
             endAdornment: (
