@@ -1,4 +1,4 @@
-import { Paper } from "@mui/material";
+import { Paper, Typography } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../App";
@@ -10,6 +10,8 @@ import ResponsiveDrawer from "../Components/ResponsiveDrawer";
 const AppPage = () => {
   const [generations, setGenerations] = useState(null);
   const [selectedGen, setSelectedGen] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
+  console.log("🚀 ~ file: AppPage.jsx:14 ~ AppPage ~ isLoading", isLoading);
   const { user } = useContext(UserContext);
   const navigate = useNavigate();
 
@@ -21,6 +23,7 @@ const AppPage = () => {
 
   useEffect(() => {
     if (user !== null) {
+      setIsLoading(true);
       const fetchData = async () => {
         let res = await fetch("/api/gen/read", {
           method: "POST",
@@ -36,10 +39,12 @@ const AppPage = () => {
         setGenerations(res.generations);
       };
       fetchData();
+      setIsLoading(false);
     }
   }, [user, selectedGen]);
 
   const handleGen = async (prompt) => {
+    setIsLoading(true);
     let res = await fetch("/api/gen/create", {
       method: "POST",
       headers: {
@@ -59,6 +64,8 @@ const AppPage = () => {
       res = await res.json();
       console.log(res);
     }
+    setIsLoading(false);
+    setSelectedGen(res.generation.id);
   };
 
   let content;
@@ -73,6 +80,7 @@ const AppPage = () => {
       <Generation selectedGen={selectedGen} generations={generations} />
     );
 
+  if (isLoading) content = <Typography variant="h1">Loading...</Typography>;
   return (
     <AnimatedPage>
       <ResponsiveDrawer

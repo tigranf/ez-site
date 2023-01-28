@@ -11,7 +11,6 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
-import SettingsIcon from "@mui/icons-material/Settings";
 import RateReviewSharpIcon from "@mui/icons-material/RateReviewSharp";
 import WebAssetIcon from "@mui/icons-material/WebAsset";
 import MeetingRoomIcon from "@mui/icons-material/MeetingRoom";
@@ -22,6 +21,7 @@ import { ColorModeContext, UserContext } from "../App";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "@mui/material";
 import { Brightness3, Brightness7 } from "@mui/icons-material";
+import SettingsMenu from "./SettingsMenu";
 
 const drawerWidth = 240;
 
@@ -50,6 +50,7 @@ function ResponsiveDrawer(props) {
       <List>
         <ListItem
           disablePadding
+          dense
           sx={{
             filter: "brightness(75%)",
             ":hover": { filter: "brightness(105%)" },
@@ -64,24 +65,17 @@ function ResponsiveDrawer(props) {
         </ListItem>
         <ListItem
           disablePadding
+          dense
           sx={{
             filter: "brightness(75%)",
             ":hover": { filter: "brightness(105%)" },
           }}
         >
-          <ListItemButton
-            onClick={() => {
-              navigate("/account");
-            }}
-          >
-            <ListItemIcon>
-              <SettingsIcon />
-            </ListItemIcon>
-            <ListItemText primary={"Account Settings"} />
-          </ListItemButton>
+          <SettingsMenu />
         </ListItem>
         <ListItem
           disablePadding
+          dense
           sx={{
             filter: "brightness(75%)",
             ":hover": { filter: "brightness(105%)" },
@@ -202,8 +196,8 @@ function ResponsiveDrawer(props) {
       <AppBar
         position="fixed"
         color="default"
-        variant="outlined"
-        sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        elevation={0}
+        sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, borderBottom: '1px solid #474747' }}
       >
         <Toolbar variant="dense">
           <IconButton

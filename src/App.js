@@ -10,7 +10,6 @@ import Error from "./Pages/Error";
 import Navbar from "./Components/Navbar";
 import Footer from "./Components/Footer";
 import AppPage from "./Pages/AppPage";
-import Account from "./Pages/Account";
 import { AnimatePresence } from "framer-motion";
 import { SnackbarProvider } from "notistack";
 
@@ -45,7 +44,6 @@ function App() {
                 <Route path="/register" element={<Register />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/app" element={<AppPage />} />
-                <Route path="/account" element={<Account />} />
                 <Route path="/error" element={<Error />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
