@@ -120,7 +120,7 @@ app.post("/api/auth/change-password", async (req, res) => {
   res.json({ message: "Password updated successfully.", user: theUser });
 });
 app.post("/api/auth/delete-account", async (req, res) => {
-  console.log("🚀 ~ file: Server.js:125 ~ app.post ~ req.body", req.body)
+  console.log("🚀 ~ file: Server.js:125 ~ app.post ~ req.body", req.body);
   await User.destroy({
     where: { id: req.body.user.id },
   }).catch((err) => {

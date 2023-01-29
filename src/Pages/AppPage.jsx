@@ -1,4 +1,4 @@
-import { Paper, Zoom } from "@mui/material";
+import { CircularProgress, LinearProgress, Paper, Zoom } from "@mui/material";
 import { useSnackbar } from "notistack";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -13,6 +13,7 @@ const AppPage = () => {
   const [generations, setGenerations] = useState(null);
   const [selectedGen, setSelectedGen] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+
   const { user } = useContext(UserContext);
   const navigate = useNavigate();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
@@ -50,6 +51,7 @@ const AppPage = () => {
       anchorOrigin: { horizontal: "center", vertical: "top" },
       TransitionComponent: Zoom,
       persist: true,
+      action: <CircularProgress sx={{ p: 1 }} color="inherit" />,
     });
     let res = await fetch("/api/gen/create", {
       method: "POST",
@@ -69,11 +71,11 @@ const AppPage = () => {
     } else {
       res = await res.json();
       console.log(res);
-      setGenerations([...generations, res.generation])
+      setGenerations([...generations, res.generation]);
     }
     setIsLoading(false);
     closeSnackbar();
-    setSelectedGen(res.generation.id)
+    setSelectedGen(res.generation.id);
   };
 
   let content;
@@ -83,11 +85,10 @@ const AppPage = () => {
         elevation={0}
         sx={{
           mx: "auto",
-          my: 0,
+          mt: 3,
           py: 2,
           px: 2,
-          maxWidth: 780,
-          minHeight: "calc(100vh - 48px)",
+          maxWidth: 770,
         }}
       >
         <PromptBar handleGen={handleGen} />
@@ -105,7 +106,9 @@ const AppPage = () => {
         generations={generations}
         selectedGen={selectedGen}
         setSelectedGen={(gen) => setSelectedGen(gen)}
+        isLoading={isLoading}
       >
+        {isLoading && <LinearProgress color="info" />}
         {content}
       </ResponsiveDrawer>
     </AnimatedPage>

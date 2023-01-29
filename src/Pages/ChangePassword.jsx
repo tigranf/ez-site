@@ -2,10 +2,20 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ConfirmInput from "../Components/ConfirmInput";
 import PasswordInput from "../Components/PasswordInput";
-import { Typography, Stack, Button, Paper, Box, Zoom } from "@mui/material";
+import {
+  Typography,
+  Stack,
+  Button,
+  Paper,
+  Box,
+  Zoom,
+  IconButton,
+  Tooltip,
+} from "@mui/material";
 import { UserContext } from "../App";
 import AnimatedPage from "../Components/AnimatedPage";
 import { useSnackbar } from "notistack";
+import { ArrowBack } from "@mui/icons-material";
 
 const ChangePassword = () => {
   const { enqueueSnackbar } = useSnackbar();
@@ -92,6 +102,15 @@ const ChangePassword = () => {
           mt: 12,
         }}
       >
+        <Tooltip title="Back">
+          <IconButton
+            size="large"
+            onClick={() => navigate(-1)}
+            sx={{ position: "absolute" }}
+          >
+            <ArrowBack fontSize="60px" />
+          </IconButton>
+        </Tooltip>
         <Typography variant="h4" component="div" textAlign={"center"}>
           Change Account Password
         </Typography>

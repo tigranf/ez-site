@@ -19,15 +19,23 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { ColorModeContext, UserContext } from "../App";
 import { useNavigate } from "react-router-dom";
-import { useTheme, Zoom } from "@mui/material";
+import { CircularProgress, useTheme, Zoom } from "@mui/material";
 import { Brightness3, Brightness7 } from "@mui/icons-material";
 import SettingsMenu from "./SettingsMenu";
 
 const drawerWidth = 240;
 
 function ResponsiveDrawer(props) {
-  const { window, children, generations, selectedGen, setSelectedGen } = props;
+  const {
+    window,
+    children,
+    generations,
+    selectedGen,
+    setSelectedGen,
+    isLoading,
+  } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
+
   const { user, setUser } = React.useContext(UserContext);
   const colorMode = React.useContext(ColorModeContext);
   const theme = useTheme();
@@ -187,21 +195,34 @@ function ResponsiveDrawer(props) {
           },
         }}
       >
+        {isLoading && (
+          <ListItem disablePadding dense>
+            <ListItemButton>
+              <ListItemIcon>
+                <WebAssetIcon />
+              </ListItemIcon>
+              <ListItemText
+                sx={{ display: "flex", justifyContent: "center" }}
+                primary={<CircularProgress color="secondary" />}
+              />
+            </ListItemButton>
+          </ListItem>
+        )}
         <List sx={{ display: "flex", flexDirection: "column-reverse" }}>
           {generations &&
             generations.map((gen) => (
-              <Zoom in={true}>
+              <Zoom in={true} timeout={400}>
                 <ListItem
                   key={gen.id}
                   disablePadding
                   sx={() => {
                     return gen.id === selectedGen
                       ? {
-                          filter: "brightness(110%)",
-                          color: "hsl(272, 72%, 72%)",
+                          filter: "brightness(100%)",
+                          color: "hsl(272, 63%, 55%)",
                           transition: "all",
                           ":hover": {
-                            filter: "brightness(100%)",
+                            filter: "brightness(90%)",
                           },
                         }
                       : {};
@@ -315,9 +336,24 @@ function ResponsiveDrawer(props) {
       </Box>
       <Box
         component="main"
-        sx={{
-          flexGrow: 1,
-          width: { md: `calc(100% - ${drawerWidth}px)` },
+        sx={() => {
+          return theme.palette.mode === "dark"
+            ? {
+                flexGrow: 1,
+                width: { md: `calc(100% - ${drawerWidth}px)` },
+                minHeight: "calc(100vh - 48px)",
+                backgroundImage: "url('/images/stacked-waves-haikei-1.svg')",
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "cover",
+              }
+            : {
+                flexGrow: 1,
+                width: { md: `calc(100% - ${drawerWidth}px)` },
+                minHeight: "calc(100vh - 48px)",
+                backgroundImage: "url('/images/stacked-waves-haikei-2.svg')",
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "cover",
+              };
         }}
       >
         {children}

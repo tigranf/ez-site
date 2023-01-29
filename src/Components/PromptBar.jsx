@@ -1,7 +1,7 @@
 import SmartToyIcon from "@mui/icons-material/SmartToy";
 import SendIcon from "@mui/icons-material/Send";
 import ClearIcon from "@mui/icons-material/Clear";
-import { IconButton, InputAdornment, TextField } from "@mui/material";
+import { IconButton, InputAdornment, TextField, Tooltip } from "@mui/material";
 import { useState } from "react";
 import Suggestions from "./Suggestions";
 
@@ -43,31 +43,35 @@ export default function PromptBar({ handleGen }) {
                   <SmartToyIcon sx={{ color: "GrayText" }} />
                 </InputAdornment>
               ) : (
-                <InputAdornment
-                  position="start"
-                  sx={{ alignItems: "flex-end" }}
-                >
-                  <ClearIcon
-                    color="disabled"
-                    onClick={() => setPrompt("")}
-                    sx={{ cursor: "pointer" }}
-                  />
-                </InputAdornment>
+                <Tooltip title="Clear">
+                  <InputAdornment
+                    position="start"
+                    sx={{ alignItems: "flex-end" }}
+                  >
+                    <ClearIcon
+                      color="disabled"
+                      onClick={() => setPrompt("")}
+                      sx={{ cursor: "pointer" }}
+                    />
+                  </InputAdornment>
+                </Tooltip>
               ),
             endAdornment: (
-              <InputAdornment
-                position="end"
-                sx={{ alignItems: "center", pb: 2 }}
-              >
-                <IconButton
-                  color="info"
-                  size="large"
-                  sx={{ borderRadius: 1 }}
-                  type="submit"
+              <Tooltip title="Generate response">
+                <InputAdornment
+                  position="end"
+                  sx={{ alignItems: "center", pb: 2 }}
                 >
-                  <SendIcon />
-                </IconButton>
-              </InputAdornment>
+                  <IconButton
+                    color="info"
+                    size="large"
+                    sx={{ borderRadius: 1 }}
+                    type="submit"
+                  >
+                    <SendIcon />
+                  </IconButton>
+                </InputAdornment>
+              </Tooltip>
             ),
             sx: { pb: 1 },
           }}
