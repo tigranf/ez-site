@@ -41,11 +41,11 @@ const AppPage = () => {
       };
       fetchData();
     }
-  }, [user, selectedGen, enqueueSnackbar, closeSnackbar]);
+  }, [user, selectedGen]);
 
   const handleGen = async (prompt) => {
     setIsLoading(true);
-    enqueueSnackbar("Generating web site. Please wait.", {
+    enqueueSnackbar("Generating web site. Please wait...", {
       variant: "info",
       anchorOrigin: { horizontal: "center", vertical: "top" },
       TransitionComponent: Zoom,
@@ -69,18 +69,26 @@ const AppPage = () => {
     } else {
       res = await res.json();
       console.log(res);
+      setGenerations([...generations, res.generation])
     }
     setIsLoading(false);
     closeSnackbar();
+    setSelectedGen(res.generation.id)
   };
 
   let content;
   if (selectedGen === 0) {
     content = (
       <Paper
-        variant="outlined"
-        // elevation={24}
-        sx={{ mx: "auto", my: 0, py: 2, px: 3, maxWidth: 900, minHeight:"calc(100vh - 48px)" }}
+        elevation={0}
+        sx={{
+          mx: "auto",
+          my: 0,
+          py: 2,
+          px: 2,
+          maxWidth: 780,
+          minHeight: "calc(100vh - 48px)",
+        }}
       >
         <PromptBar handleGen={handleGen} />
       </Paper>
@@ -95,6 +103,7 @@ const AppPage = () => {
     <AnimatedPage>
       <ResponsiveDrawer
         generations={generations}
+        selectedGen={selectedGen}
         setSelectedGen={(gen) => setSelectedGen(gen)}
       >
         {content}

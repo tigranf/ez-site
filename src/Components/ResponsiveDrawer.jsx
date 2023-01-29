@@ -19,16 +19,15 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { ColorModeContext, UserContext } from "../App";
 import { useNavigate } from "react-router-dom";
-import { useTheme } from "@mui/material";
+import { useTheme, Zoom } from "@mui/material";
 import { Brightness3, Brightness7 } from "@mui/icons-material";
 import SettingsMenu from "./SettingsMenu";
 
 const drawerWidth = 240;
 
 function ResponsiveDrawer(props) {
-  const { window, children, generations, setSelectedGen } = props;
+  const { window, children, generations, selectedGen, setSelectedGen } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [gens, setGens] = React.useState(generations);
   const { user, setUser } = React.useContext(UserContext);
   const colorMode = React.useContext(ColorModeContext);
   const theme = useTheme();
@@ -47,7 +46,28 @@ function ResponsiveDrawer(props) {
         transition: "all",
       }}
     >
-      <Toolbar />
+      <Toolbar>
+        <Box
+          sx={{ cursor: "pointer", width: "100%", height: "100%" }}
+          onClick={() => navigate("/")}
+        >
+          <Typography
+            variant="h5"
+            component="div"
+            sx={{
+              flexGrow: 1,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontWeight: "bold",
+              height: "100%",
+              width: "100%",
+            }}
+          >
+            EZ Site <RateReviewSharpIcon color="primary" fontSize="large" />
+          </Typography>
+        </Box>
+      </Toolbar>
       <List>
         <ListItem
           disablePadding
@@ -167,29 +187,46 @@ function ResponsiveDrawer(props) {
           },
         }}
       >
-        <List>
+        <List sx={{ display: "flex", flexDirection: "column-reverse" }}>
           {generations &&
-            generations.map((gen, i) => (
-              <ListItem key={i} disablePadding>
-                <ListItemButton
-                  onClick={() => {
-                    setSelectedGen(gen.id);
+            generations.map((gen) => (
+              <Zoom in={true}>
+                <ListItem
+                  key={gen.id}
+                  disablePadding
+                  sx={() => {
+                    return gen.id === selectedGen
+                      ? {
+                          filter: "brightness(110%)",
+                          color: "hsl(272, 72%, 72%)",
+                          transition: "all",
+                          ":hover": {
+                            filter: "brightness(100%)",
+                          },
+                        }
+                      : {};
                   }}
                 >
-                  <ListItemIcon>
-                    <WebAssetIcon />
-                  </ListItemIcon>
-                  <ListItemText
-                    primary={gen.title}
-                    sx={{
-                      display: "-webkit-box",
-                      WebkitLineClamp: 3,
-                      WebkitBoxOrient: "vertical",
-                      overflow: "hidden",
+                  <ListItemButton
+                    onClick={() => {
+                      setSelectedGen(gen.id);
                     }}
-                  />
-                </ListItemButton>
-              </ListItem>
+                  >
+                    <ListItemIcon>
+                      <WebAssetIcon />
+                    </ListItemIcon>
+                    <ListItemText
+                      primary={gen.title}
+                      sx={{
+                        display: "-webkit-box",
+                        WebkitLineClamp: 3,
+                        WebkitBoxOrient: "vertical",
+                        overflow: "hidden",
+                      }}
+                    />
+                  </ListItemButton>
+                </ListItem>
+              </Zoom>
             ))}
         </List>
       </Box>
