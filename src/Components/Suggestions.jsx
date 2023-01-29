@@ -2,12 +2,15 @@ import * as React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import { CardActionArea, CardMedia, Divider } from "@mui/material";
+import { CardActionArea, CardMedia, Stack } from "@mui/material";
+import { useTheme } from "@emotion/react";
 
 export default function Suggestions({ setPrompt }) {
+  const theme = useTheme();
+
   return (
-    <>
-      <Card elevation={6}>
+    <Stack spacing={1}>
+      <Card variant="outlined">
         <CardContent>
           <Typography
             gutterBottom
@@ -18,14 +21,34 @@ export default function Suggestions({ setPrompt }) {
             Type a brief but detailed description of your website idea.
           </Typography>
         </CardContent>
-        <CardMedia
-          component="img"
-          height="140"
-          image="/images/low-poly-grid-haikei.svg"
-          alt="low poly vector graphic"
-        />
+        <Card>
+          <CardActionArea>
+            {theme.palette.mode === "dark" ? (
+              <CardMedia
+                component="img"
+                height="140"
+                image="/images/low-poly-grid-haikei.svg"
+                alt="low poly vector graphic"
+                sx={{
+                  objectFit: "none",
+                }}
+              />
+            ) : (
+              <CardMedia
+                component="img"
+                height="140"
+                image="/images/low-poly-grid-haikei.svg"
+                alt="low poly vector graphic"
+                sx={{
+                  objectFit: "none",
+                  filter: 'brightness(170%)',
+                  opacity: 0.9,
+                }}
+              />
+            )}
+          </CardActionArea>
+        </Card>
       </Card>
-      <Divider variant="fullWidth" />
       <Card>
         <CardActionArea
           onClick={(e) => {
@@ -41,12 +64,11 @@ export default function Suggestions({ setPrompt }) {
               textAlign={"center"}
               gutterBottom
             >
-              🙶 uber for private jet flights 🙷
+              ~ uber for private jet flights ~
             </Typography>
           </CardContent>
         </CardActionArea>
       </Card>
-      <Divider variant="fullWidth" />
       <Card>
         <CardActionArea
           onClick={(e) => {
@@ -62,13 +84,12 @@ export default function Suggestions({ setPrompt }) {
               textAlign={"center"}
               gutterBottom
             >
-              🙶 a website that lets you rate and review people working in the
-              service industry 🙷
+              ~ a website that lets you rate and review people working in the
+              service industry ~
             </Typography>
           </CardContent>
         </CardActionArea>
       </Card>
-      <Divider variant="fullWidth" />
       <Card>
         <CardActionArea
           onClick={(e) => {
@@ -84,13 +105,12 @@ export default function Suggestions({ setPrompt }) {
               textAlign={"center"}
               gutterBottom
             >
-              🙶 a job board site for software developers with a focus on life
-              quality in different urban areas 🙷
+              ~ a job board site for software developers with a focus on life
+              quality in different urban areas ~
             </Typography>
           </CardContent>
         </CardActionArea>
       </Card>
-      <Divider variant="fullWidth" />
       <Card>
         <CardActionArea
           onClick={(e) => {
@@ -106,13 +126,12 @@ export default function Suggestions({ setPrompt }) {
               textAlign={"center"}
               gutterBottom
             >
-              🙶 A platform designed for individuals and small businesses that
-              helps them manage their finances. 🙷
+              ~ A platform designed for individuals and small businesses that
+              helps them manage their finances. ~
             </Typography>
           </CardContent>
         </CardActionArea>
       </Card>
-      <Divider variant="fullWidth" />
       <Card>
         <CardActionArea
           onClick={(e) => {
@@ -128,12 +147,11 @@ export default function Suggestions({ setPrompt }) {
               textAlign={"center"}
               gutterBottom
             >
-              🙶 Health Insurance for Young People 🙷
+              ~ Health Insurance for Young People ~
             </Typography>
           </CardContent>
         </CardActionArea>
       </Card>
-      <Divider variant="fullWidth" />
-    </>
+    </Stack>
   );
 }

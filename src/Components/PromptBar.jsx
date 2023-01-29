@@ -10,7 +10,6 @@ export default function PromptBar({ handleGen }) {
 
   return (
     <>
-      <Suggestions setPrompt={(prompt) => setPrompt(prompt)} />
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -74,6 +73,7 @@ export default function PromptBar({ handleGen }) {
           }}
         />
       </form>
+      <Suggestions setPrompt={(prompt) => setPrompt(prompt)} />
     </>
   );
 }

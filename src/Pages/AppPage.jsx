@@ -1,9 +1,11 @@
-import { Paper, Typography } from "@mui/material";
+import { Paper, Zoom } from "@mui/material";
+import { useSnackbar } from "notistack";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../App";
 import AnimatedPage from "../Components/AnimatedPage";
 import Generation from "../Components/Generation";
+import GenSkeleton from "../Components/GenSkeleton";
 import PromptBar from "../Components/PromptBar";
 import ResponsiveDrawer from "../Components/ResponsiveDrawer";
 
@@ -13,6 +15,7 @@ const AppPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { user } = useContext(UserContext);
   const navigate = useNavigate();
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
   useEffect(() => {
     if (user === null) {
@@ -22,7 +25,6 @@ const AppPage = () => {
 
   useEffect(() => {
     if (user !== null) {
-      setIsLoading(true);
       const fetchData = async () => {
         let res = await fetch("/api/gen/read", {
           method: "POST",
@@ -38,12 +40,17 @@ const AppPage = () => {
         setGenerations(res.generations);
       };
       fetchData();
-      setIsLoading(false);
     }
-  }, [user, selectedGen]);
+  }, [user, selectedGen, enqueueSnackbar, closeSnackbar]);
 
   const handleGen = async (prompt) => {
     setIsLoading(true);
+    enqueueSnackbar("Generating web site. Please wait.", {
+      variant: "info",
+      anchorOrigin: { horizontal: "center", vertical: "top" },
+      TransitionComponent: Zoom,
+      persist: true,
+    });
     let res = await fetch("/api/gen/create", {
       method: "POST",
       headers: {
@@ -64,14 +71,17 @@ const AppPage = () => {
       console.log(res);
     }
     setIsLoading(false);
-    setSelectedGen(res.generation.id);
-    
+    closeSnackbar();
   };
 
   let content;
   if (selectedGen === 0) {
     content = (
-      <Paper variant="outlined" sx={{ mx: 4, my: 6 }}>
+      <Paper
+        variant="outlined"
+        // elevation={24}
+        sx={{ mx: "auto", my: 0, py: 2, px: 3, maxWidth: 900, minHeight:"calc(100vh - 48px)" }}
+      >
         <PromptBar handleGen={handleGen} />
       </Paper>
     );
@@ -80,7 +90,7 @@ const AppPage = () => {
       <Generation selectedGen={selectedGen} generations={generations} />
     );
 
-  if (isLoading) content = <Typography variant="h1">Loading...</Typography>;
+  if (isLoading) content = <GenSkeleton />;
   return (
     <AnimatedPage>
       <ResponsiveDrawer

@@ -13,6 +13,7 @@ import AppPage from "./Pages/AppPage";
 import { AnimatePresence } from "framer-motion";
 import { SnackbarProvider } from "notistack";
 import ChangePassword from "./Pages/ChangePassword";
+import { Box } from "@mui/material";
 
 export const UserContext = createContext();
 export const ColorModeContext = createContext({ toggleColorMode: () => {} });
@@ -20,7 +21,9 @@ export const ColorModeContext = createContext({ toggleColorMode: () => {} });
 function App() {
   const [user, setUser] = useState(null);
   const location = useLocation();
-  console.log(user)
+
+  console.log(user);
+
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
     if (user) setUser(user);
@@ -36,9 +39,20 @@ function App() {
         dense
         preventDuplicate
       >
-        <div style={{minHeight: 'calc(100vh - 0px)', display: 'flex', flexDirection: 'column'}}>
+        <div
+          style={{
+            minHeight: "100vh",
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
           <Navbar />
-          <div style={{ marginTop: 48, overflowX: "hidden" }}>
+          <Box
+            sx={{
+              marginTop: 6,
+              overflowX: "hidden",
+            }}
+          >
             <AnimatePresence mode="wait">
               <Routes key={location.pathname} location={location}>
                 <Route path="/" element={<Home />} />
@@ -50,13 +64,14 @@ function App() {
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </AnimatePresence>
-          </div>
+          </Box>
           <Footer />
         </div>
       </SnackbarProvider>
     </UserContext.Provider>
   );
 }
+
 export default function ToggleColorMode() {
   const [mode, setMode] = useState("dark");
   const colorMode = useMemo(
@@ -86,4 +101,3 @@ export default function ToggleColorMode() {
     </ColorModeContext.Provider>
   );
 }
-// export default App;

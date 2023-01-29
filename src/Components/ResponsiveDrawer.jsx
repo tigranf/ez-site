@@ -28,6 +28,7 @@ const drawerWidth = 240;
 function ResponsiveDrawer(props) {
   const { window, children, generations, setSelectedGen } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [gens, setGens] = React.useState(generations);
   const { user, setUser } = React.useContext(UserContext);
   const colorMode = React.useContext(ColorModeContext);
   const theme = useTheme();
@@ -58,9 +59,17 @@ function ResponsiveDrawer(props) {
         >
           <ListItemButton onClick={colorMode.toggleColorMode}>
             <ListItemIcon>
-              { theme.palette.mode === 'dark' ? <Brightness7 /> : <Brightness3 /> }
+              {theme.palette.mode === "dark" ? (
+                <Brightness7 />
+              ) : (
+                <Brightness3 />
+              )}
             </ListItemIcon>
-            <ListItemText primary={theme.palette.mode === 'dark' ? "Light Theme" : "Dark Theme"} />
+            <ListItemText
+              primary={
+                theme.palette.mode === "dark" ? "Light Theme" : "Dark Theme"
+              }
+            />
           </ListItemButton>
         </ListItem>
         <ListItem
@@ -110,37 +119,37 @@ function ResponsiveDrawer(props) {
             <ListItemText primary={"Logout"} />
           </ListItemButton>
         </ListItem>
-      </List>
-      <Divider sx={{ mt: "auto" }} />
-      <ListItem
-        disablePadding
-        sx={{
-          filter: "brightness(110%)",
-          color: "hsl(203, 91%, 62%)",
-          transition: "all",
-          ":hover": {
-            filter: "brightness(100%)",
-            outline: "1px solid hsl(203, 91%, 62%)",
-            outlineOffset: "-1px",
-            borderRadius: 2,
-          },
-        }}
-      >
-        <ListItemButton
-          divider={true}
-          onClick={() => {
-            setSelectedGen(0);
+        <Divider sx={{ mt: "auto" }} />
+        <ListItem
+          disablePadding
+          sx={{
+            filter: "brightness(110%)",
+            color: "hsl(203, 91%, 62%)",
+            transition: "all",
+            ":hover": {
+              filter: "brightness(100%)",
+              outline: "1px solid hsl(203, 91%, 62%)",
+              outlineOffset: "-1px",
+              borderRadius: 2,
+            },
           }}
         >
-          <ListItemIcon>
-            <AddIcon color="info" />
-          </ListItemIcon>
-          <ListItemText
-            primaryTypographyProps={{ variant: "h6" }}
-            primary={"Generate Site"}
-          />
-        </ListItemButton>
-      </ListItem>
+          <ListItemButton
+            divider={true}
+            onClick={() => {
+              setSelectedGen(0);
+            }}
+          >
+            <ListItemIcon>
+              <AddIcon color="info" />
+            </ListItemIcon>
+            <ListItemText
+              primaryTypographyProps={{ variant: "h6" }}
+              primary={"Generate Site"}
+            />
+          </ListItemButton>
+        </ListItem>
+      </List>
       <Box
         sx={{
           overflowY: "auto",
@@ -197,7 +206,10 @@ function ResponsiveDrawer(props) {
         position="fixed"
         color="default"
         elevation={0}
-        sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, borderBottom: '1px solid #474747' }}
+        sx={{
+          zIndex: (theme) => theme.zIndex.drawer + 1,
+          borderBottom: "1px solid #474747",
+        }}
       >
         <Toolbar variant="dense">
           <IconButton
@@ -232,7 +244,6 @@ function ResponsiveDrawer(props) {
         sx={{ width: { md: drawerWidth }, flexShrink: { md: 0 } }}
         aria-label="mailbox folders"
       >
-        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
         <Drawer
           container={container}
           variant="temporary"
@@ -269,7 +280,6 @@ function ResponsiveDrawer(props) {
         component="main"
         sx={{
           flexGrow: 1,
-          p: 3,
           width: { md: `calc(100% - ${drawerWidth}px)` },
         }}
       >
