@@ -62,8 +62,21 @@ app.listen(expressPort, () => {
   console.log(`Express server listening on port ${expressPort}`);
 });
 
-// * AUTHENTICATION -------------------------------------------------------
+// * USER & AUTHENTICATION -------------------------------------------------------
 
+app.post("/api/auth/login", passport.authenticate("local"), (req, res) => {
+  console.log(req.session.passport.user);
+  res.json({ message: "Login successful", user: req.session.passport.user });
+});
+app.post("/api/auth/logout", (req, res) => {
+  req.logout(function (err) {
+    if (err) {
+      res.status(500).json({ message: "Error logging out" });
+    } else {
+      res.json({ message: "Logout successful" });
+    }
+  });
+});
 app.post("/api/auth/register", async (req, res) => {
   let { username, password, email } = req.body;
   let hashedPass = await bcrypt.hash(password, 10);
@@ -80,18 +93,20 @@ app.post("/api/auth/register", async (req, res) => {
   });
   res.json({ message: "User registered successfully", user: newUser });
 });
-app.post("/api/auth/login", passport.authenticate("local"), (req, res) => {
-  console.log(req.session.passport.user);
-  res.json({ message: "Login successful", user: req.session.passport.user });
-});
-app.post("/api/auth/logout", (req, res) => {
-  req.logout(function(err) {
-    if (err) {
-      res.status(500).json({ message: "Error logging out" });
-    } else {
-      res.json({ message: "Logout successful" });
+app.post("/api/auth/change-password", async (req, res) => {
+  let hashedPass = await bcrypt.hash(req.body.password, 10);
+  let theUser = await User.update(
+    {
+      password: hashedPass,
+    },
+    {
+      where: { id: req.session.passport.user.id },
     }
+  ).catch((err) => {
+    console.log(err);
+    res.json({ message: "Error creating user", error: err });
   });
+  res.json({ message: "Password updated successfully.", user: theUser });
 });
 
 // * GENERATIONS ----------------------------------------------------------------
@@ -106,6 +121,9 @@ app.post("/api/gen/create", async (req, res) => {
     genObject: data,
     createdAt: new Date(),
     updatedAt: new Date(),
+  }).catch((err) => {
+    console.log(err);
+    res.json({ message: "Error creating generation", error: err });
   });
   res.json({ message: "Created new generation", generation: newGen });
 });

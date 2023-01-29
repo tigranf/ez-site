@@ -11,7 +11,6 @@ const AppPage = () => {
   const [generations, setGenerations] = useState(null);
   const [selectedGen, setSelectedGen] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
-  console.log("🚀 ~ file: AppPage.jsx:14 ~ AppPage ~ isLoading", isLoading);
   const { user } = useContext(UserContext);
   const navigate = useNavigate();
 
@@ -66,6 +65,7 @@ const AppPage = () => {
     }
     setIsLoading(false);
     setSelectedGen(res.generation.id);
+    
   };
 
   let content;

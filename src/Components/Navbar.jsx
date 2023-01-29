@@ -109,7 +109,7 @@ const Navbar = () => {
             </Box>
           </Typography>
           <Box sx={{ display: "flex", alignItems: "center", gap: 4, mx: 4 }}>
-            {["Home", "App", "Account"].map((item) => (
+            {["Home", "App"].map((item) => (
               <NavLink
                 end
                 to={item === "Home" ? "/" : "/" + item.toLowerCase()}

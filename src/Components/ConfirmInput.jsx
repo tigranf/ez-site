@@ -19,6 +19,7 @@ const ConfirmInput = ({ password, clearClick, handleConfirmPassword }) => {
   }, [clearClick]);
 
   const handleChange = (e) => {
+    e.preventDefault();
     handleConfirmPassword(e.target.value);
     setConfirm(e.target.value);
     if (e.target.value === password) setMatch(true);

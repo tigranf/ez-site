@@ -1,13 +1,21 @@
-import * as React from 'react';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import { Divider, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
-import { Clear, Delete, Settings } from '@mui/icons-material';
-import ChangePassModal from './ChangePassModal';
+import * as React from "react";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import {
+  Divider,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+} from "@mui/material";
+import { Clear, Delete, Password, Settings } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
+import ConfirmDeleteModal from "./ConfirmDeleteModal";
 
 export default function SettingsMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+  const navigate = useNavigate();
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -30,18 +38,36 @@ export default function SettingsMenu() {
         open={open}
         onClose={handleClose}
         anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
+          vertical: "top",
+          horizontal: "right",
         }}
         transformOrigin={{
-          vertical: 'top',
-          horizontal: 'left',
+          vertical: "top",
+          horizontal: "left",
         }}
       >
-        <ChangePassModal />
-        <MenuItem onClick={handleClose}><Delete sx={{mr:2}}/><Divider flexItem orientation="vertical" sx={{ mr: 2 }} /> Delete Account</MenuItem>
+        <MenuItem
+          onClick={() => {
+            handleClose();
+            navigate("/change-password");
+          }}
+        >
+          <Password sx={{ mr: 2 }} />
+          <Divider flexItem orientation="vertical" sx={{ mr: 2 }} />
+          Change Password
+        </MenuItem>
+        {/* <MenuItem onClick={handleClose}>
+          <Delete sx={{ mr: 2 }} />
+          <Divider flexItem orientation="vertical" sx={{ mr: 2 }} />
+          Delete Account
+        </MenuItem> */}
+        <ConfirmDeleteModal />
         <Divider />
-        <MenuItem onClick={handleClose}><Clear sx={{mr:2}}/><Divider flexItem orientation="vertical" sx={{ mr: 2 }} /> Close</MenuItem>
+        <MenuItem onClick={handleClose}>
+          <Clear sx={{ mr: 2 }} />
+          <Divider flexItem orientation="vertical" sx={{ mr: 2 }} />
+          Close
+        </MenuItem>
       </Menu>
     </>
   );

@@ -22,6 +22,7 @@ const PasswordInput = ({ handlePassword, clearClick }) => {
   }, [password]);
 
   const handleChange = (e) => {
+    e.preventDefault();
     let newPassword = e.target.value;
     handlePassword(newPassword);
     setPassword(newPassword);
@@ -61,7 +62,7 @@ const PasswordInput = ({ handlePassword, clearClick }) => {
 
   return (
     <>
-      <TextField
+      <TextField  
         id="password-input"
         label="Password"
         color={color}
@@ -71,7 +72,7 @@ const PasswordInput = ({ handlePassword, clearClick }) => {
         onCopy={handleCopyPaste}
         onPaste={handleCopyPaste}
         type="password"
-        required={true}
+        required={true}        
       />
       {password.length > 0 && (
         <Paper elevation={8}>

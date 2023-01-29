@@ -12,6 +12,7 @@ import Footer from "./Components/Footer";
 import AppPage from "./Pages/AppPage";
 import { AnimatePresence } from "framer-motion";
 import { SnackbarProvider } from "notistack";
+import ChangePassword from "./Pages/ChangePassword";
 
 export const UserContext = createContext();
 export const ColorModeContext = createContext({ toggleColorMode: () => {} });
@@ -44,6 +45,7 @@ function App() {
                 <Route path="/register" element={<Register />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/app" element={<AppPage />} />
+                <Route path="/change-password" element={<ChangePassword />} />
                 <Route path="/error" element={<Error />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
