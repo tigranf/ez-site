@@ -64,10 +64,21 @@ app.listen(expressPort, () => {
 
 // * USER & AUTHENTICATION -------------------------------------------------------
 
-app.post("/api/auth/login", passport.authenticate("local"), (req, res) => {
-  console.log(req.session.passport.user);
-  res.json({ message: "Login successful", user: req.session.passport.user });
-});
+app.post(
+  "/api/auth/login",
+  passport.authenticate("local"),
+  (req, res, next) => {
+    req.login(req.session.passport.user, function (err) {
+      if (err) {
+        return next(err);
+      }
+      return res.json({
+        message: "Login successful",
+        user: req.session.passport.user,
+      });
+    });
+  }
+);
 app.post("/api/auth/logout", (req, res) => {
   req.logout(function (err) {
     if (err) {
@@ -100,13 +111,24 @@ app.post("/api/auth/change-password", async (req, res) => {
       password: hashedPass,
     },
     {
-      where: { id: req.session.passport.user.id },
+      where: { id: req.body.user.id },
     }
   ).catch((err) => {
     console.log(err);
     res.json({ message: "Error creating user", error: err });
   });
   res.json({ message: "Password updated successfully.", user: theUser });
+});
+app.post("/api/auth/delete-account", async (req, res) => {
+  console.log("🚀 ~ file: Server.js:125 ~ app.post ~ req.body", req.body)
+  await User.destroy({
+    where: { id: req.body.user.id },
+  }).catch((err) => {
+    console.log(err);
+    res.json({ message: "Error deleting account", error: err });
+    return;
+  });
+  res.json({ message: "Account deleted successfully." });
 });
 
 // * GENERATIONS ----------------------------------------------------------------

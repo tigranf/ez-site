@@ -10,13 +10,19 @@ import {
   Button,
   DialogActions,
   Divider,
-  IconButton,
   MenuItem,
+  Zoom,
 } from "@mui/material";
-import { Delete, DeleteForever, Password } from "@mui/icons-material";
+import { DeleteForever } from "@mui/icons-material";
+import { useSnackbar } from "notistack";
+import { useNavigate } from "react-router-dom";
+import { UserContext } from "../App";
 
 export default function ConfirmDeleteModal() {
+  const { user, setUser } = React.useContext(UserContext);
   const [open, setOpen] = React.useState(false);
+  const { enqueueSnackbar } = useSnackbar();
+  const navigate = useNavigate();
 
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
@@ -37,14 +43,26 @@ export default function ConfirmDeleteModal() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        user: localStorage.getItem("user"),
+        user: user,
       }),
     });
     if (!res.ok) {
+      enqueueSnackbar(res.message, {
+        variant: "error",
+        anchorOrigin: { horizontal: "center", vertical: "top" },
+        TransitionComponent: Zoom,
+      });
       throw new Error(res.statusText);
     } else {
       res = await res.json();
       console.log(res);
+      setUser(null);
+      navigate("/");
+      enqueueSnackbar(res.message, {
+        variant: "success",
+        anchorOrigin: { horizontal: "center", vertical: "top" },
+        TransitionComponent: Zoom,
+      });
     }
   };
 
@@ -67,7 +85,7 @@ export default function ConfirmDeleteModal() {
         aria-labelledby="responsive-dialog-title"
       >
         <DialogTitle textAlign={"center"} id="responsive-dialog-title">
-          <Box sx={{display:'flex',gap:1,alignItems:'center'}}>
+          <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
             <DeleteForever color="error" />
             {"Delete Account"}
           </Box>
@@ -75,7 +93,8 @@ export default function ConfirmDeleteModal() {
         <DialogContent>
           <DialogContentText gutterBottom textAlign={"center"}>
             Are you absolutely sure that you wish to delete your entire account?
-            <br />This action can not be undone. All user data will be lost.
+            <br />
+            This action can not be undone. All user data will be lost.
           </DialogContentText>
           <DialogActions>
             <Button onClick={handleClose}>Cancel</Button>

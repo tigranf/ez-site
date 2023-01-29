@@ -85,7 +85,7 @@ const Login = () => {
           width: "100%",
           height: "100%",
           mx: "auto",
-          mt: 12,
+          my: 12,
         }}
       >
         <Typography variant="h4" component="div" textAlign={"center"}>

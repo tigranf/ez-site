@@ -7,7 +7,7 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
-import { Clear, Delete, Password, Settings } from "@mui/icons-material";
+import { Clear, Password, Settings } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import ConfirmDeleteModal from "./ConfirmDeleteModal";
 
@@ -56,11 +56,6 @@ export default function SettingsMenu() {
           <Divider flexItem orientation="vertical" sx={{ mr: 2 }} />
           Change Password
         </MenuItem>
-        {/* <MenuItem onClick={handleClose}>
-          <Delete sx={{ mr: 2 }} />
-          <Divider flexItem orientation="vertical" sx={{ mr: 2 }} />
-          Delete Account
-        </MenuItem> */}
         <ConfirmDeleteModal />
         <Divider />
         <MenuItem onClick={handleClose}>

@@ -8,7 +8,7 @@ import AnimatedPage from "../Components/AnimatedPage";
 import { useSnackbar } from "notistack";
 
 const ChangePassword = () => {
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
   const [formInputs, setFormInputs] = useState({
     password: "",
     confirmPassword: "",
@@ -16,7 +16,7 @@ const ChangePassword = () => {
   const [clear, setClear] = useState(false);
   const [invalid, setInvalid] = useState(true);
 
-  const { user, setUser } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -56,7 +56,7 @@ const ChangePassword = () => {
       },
       body: JSON.stringify({
         password: formInputs.password,
-        user: localStorage.getItem("user"),
+        user: user,
       }),
     });
     if (!res.ok) {
