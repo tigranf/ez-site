@@ -1,3 +1,4 @@
+import { SmartToy, WebAsset } from "@mui/icons-material";
 import { CircularProgress, LinearProgress, Paper, Zoom } from "@mui/material";
 import { useSnackbar } from "notistack";
 import { useContext, useEffect, useState } from "react";
@@ -46,13 +47,31 @@ const AppPage = () => {
 
   const handleGen = async (prompt) => {
     setIsLoading(true);
-    enqueueSnackbar("Generating web site. Please wait...", {
+    enqueueSnackbar("Generating web site. Please wait.", {
       variant: "info",
       anchorOrigin: { horizontal: "center", vertical: "top" },
       TransitionComponent: Zoom,
       persist: true,
       action: <CircularProgress sx={{ p: 1 }} color="inherit" />,
     });
+    setTimeout(() => {
+      enqueueSnackbar("Powered by openAI", {
+        variant: "warning",
+        anchorOrigin: { horizontal: "center", vertical: "top" },
+        TransitionComponent: Zoom,
+        persist: true,
+        action: <SmartToy color="inherit" />,
+      });
+    }, 5200);
+    setTimeout(() => {
+      enqueueSnackbar("Almost there...", {
+        variant: "success",
+        anchorOrigin: { horizontal: "center", vertical: "top" },
+        TransitionComponent: Zoom,
+        persist: true,
+        action: <WebAsset color="inherit" />,
+      });
+    }, 15400);
     let res = await fetch("/api/gen/create", {
       method: "POST",
       headers: {

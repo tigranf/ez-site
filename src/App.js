@@ -22,8 +22,6 @@ function App() {
   const [user, setUser] = useState(null);
   const location = useLocation();
 
-  console.log(user);
-
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
     if (user) setUser(user);

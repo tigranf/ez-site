@@ -7,7 +7,7 @@ const GenSkeleton = () => {
       sx={{
         display: "flex",
         flexDirection: "column",
-        minHeight: "90vh",
+        minHeight: "100%",
         py: 4,
         px: 3,
       }}
