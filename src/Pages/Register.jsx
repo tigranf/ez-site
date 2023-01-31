@@ -82,6 +82,7 @@ const Register = () => {
     if (user) {
       console.log(user);
       setUser(user);
+      localStorage.setItem("user", JSON.stringify(res.user));
       navigate("/login");
     } else if (error) {
       console.log(error);

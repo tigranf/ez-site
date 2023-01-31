@@ -211,9 +211,8 @@ function ResponsiveDrawer(props) {
         <List sx={{ display: "flex", flexDirection: "column-reverse" }}>
           {generations &&
             generations.map((gen) => (
-              <Zoom in={true} timeout={400}>
+              <Zoom key={gen.id} in={true} timeout={400}>
                 <ListItem
-                  key={gen.id}
                   disablePadding
                   sx={() => {
                     return gen.id === selectedGen
@@ -340,7 +339,7 @@ function ResponsiveDrawer(props) {
           return theme.palette.mode === "dark"
             ? {
                 flexGrow: 1,
-                width: { md: `calc(100% - ${drawerWidth}px)` },
+                width: `calc(100% - ${drawerWidth}px)` ,
                 minHeight: "calc(100vh - 48px)",
                 backgroundImage: "url('/images/stacked-waves-haikei-1.svg')",
                 backgroundRepeat: "no-repeat",
@@ -348,7 +347,7 @@ function ResponsiveDrawer(props) {
               }
             : {
                 flexGrow: 1,
-                width: { md: `calc(100% - ${drawerWidth}px)` },
+                width: `calc(100% - ${drawerWidth}px)` ,
                 minHeight: "calc(100vh - 48px)",
                 backgroundImage: "url('/images/stacked-waves-haikei-2.svg')",
                 backgroundRepeat: "no-repeat",
