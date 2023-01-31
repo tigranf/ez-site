@@ -42,6 +42,7 @@ function App() {
             minHeight: "100vh",
             display: "flex",
             flexDirection: "column",
+            mx:'auto'
           }}
         >
           <Navbar />
@@ -49,6 +50,11 @@ function App() {
             sx={{
               marginTop: 6,
               overflowX: "hidden",
+              background: 'url(/images/blob-scene-2.svg)',
+              minHeight: 'calc(100vh - 140px)',
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
             }}
           >
             <AnimatePresence mode="wait">
