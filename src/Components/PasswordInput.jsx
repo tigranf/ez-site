@@ -62,7 +62,7 @@ const PasswordInput = ({ handlePassword, clearClick }) => {
 
   return (
     <>
-      <TextField  
+      <TextField
         id="password-input"
         label="Password"
         color={color}
@@ -72,7 +72,7 @@ const PasswordInput = ({ handlePassword, clearClick }) => {
         onCopy={handleCopyPaste}
         onPaste={handleCopyPaste}
         type="password"
-        required={true}        
+        required={true}
       />
       {password.length > 0 && (
         <Paper elevation={8}>

@@ -1,6 +1,6 @@
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { Routes, Route, useLocation } from "react-router-dom";
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { createContext, useEffect, useMemo, useState } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import Home from "./Pages/Home";
 import Register from "./Pages/Register";
@@ -50,11 +50,14 @@ function App() {
           <Box
             sx={{
               marginTop: 6,
-              background: theme.palette.mode === 'dark' ? 'url(/images/blob-scene-2.svg)' : 'url(/images/blob-scene-2-l.svg)',
+              background:
+                theme.palette.mode === "dark"
+                  ? "url(/images/blob-scene-2.svg)"
+                  : "url(/images/blob-scene-2-l.svg)",
               backgroundRepeat: "no-repeat",
               backgroundSize: "cover",
               backgroundPosition: "center",
-              minHeight: 'calc(100vh - 134px)',
+              minHeight: "calc(100vh - 134px)",
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
@@ -95,6 +98,10 @@ export default function ToggleColorMode() {
       createTheme({
         palette: {
           mode,
+          background: {
+            default: mode === "dark" ? "#050a0e" : "#C5D1DC",
+            paper: mode === "dark" ? "#212639" : "#Eaf3ff",
+          },
         },
       }),
     [mode]

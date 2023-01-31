@@ -41,7 +41,7 @@ export default function Suggestions({ setPrompt }) {
                 alt="low poly vector graphic"
                 sx={{
                   objectFit: "none",
-                  filter: 'brightness(170%)',
+                  filter: "brightness(170%)",
                   opacity: 0.9,
                 }}
               />

@@ -66,7 +66,6 @@ const AppPage = () => {
         anchorOrigin: { horizontal: "center", vertical: "top" },
         TransitionComponent: Zoom,
         persist: true,
-        // action: <SmartToy color="inherit" />,
         action: (
           <IconButton
             color="success"
@@ -110,7 +109,7 @@ const AppPage = () => {
         anchorOrigin: { horizontal: "center", vertical: "top" },
         TransitionComponent: Zoom,
         persist: true,
-        action: <WebAsset sx={{mr:1}} color="inherit" />,
+        action: <WebAsset sx={{ mr: 1 }} color="inherit" />,
       });
     }, 10400);
     let res = await fetch("/api/gen/create", {

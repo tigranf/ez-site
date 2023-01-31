@@ -137,7 +137,9 @@ const Login = () => {
               <Typography>
                 Don't have an account?{" "}
                 <Link to="/register" style={{ textDecoration: "none" }}>
-                  <Button variant="text" size="small">Click here</Button>
+                  <Button variant="text" size="small">
+                    Click here
+                  </Button>
                 </Link>{" "}
                 to create one.
               </Typography>

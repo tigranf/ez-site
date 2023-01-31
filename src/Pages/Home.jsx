@@ -9,7 +9,7 @@ const Home = () => {
   const theme = useTheme();
   return (
     <AnimatedPage>
-      <Box sx={{ overflowX: "hidden", }}>
+      <Box sx={{ overflowX: "hidden" }}>
         <Grid container spacing={3} mx="auto">
           <Grid
             item
@@ -76,9 +76,12 @@ const Home = () => {
             <Grid item>
               <img
                 src="/images/computer-website-3d.png"
-                alt="Random Hero"
+                alt="3D render of computer with abstract art coming out of the screen"
                 style={{
-                  filter: "saturate(40%) contrast(120%) brightness(70%)",
+                  filter:
+                    theme.palette.mode === "dark"
+                      ? "saturate(40%) contrast(120%) brightness(75%)"
+                      : "",
                   minWidth: 765,
                   maxHeight: 785,
                 }}

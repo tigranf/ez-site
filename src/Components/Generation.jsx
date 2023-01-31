@@ -25,34 +25,6 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import TypewriterComponent from "typewriter-effect";
-/* <TypewriterComponent
-        onInit={(typewriter) => {
-          typewriter
-            .start()
-            .typeString("Hello World!")
-            .callFunction(() => {
-              console.log("String typed out!");
-            })
-            .pauseFor(2500)
-            .deleteAll()
-            .callFunction(() => {
-              console.log("All strings were deleted");
-            })
-            .start();
-        }}
-      />
-      <TypewriterComponent
-        options={{
-          strings: [title.substring(0, 9).toUpperCase(), title],
-          cursor: "_",
-          delay: 50,
-          deleteSpeed: 25,
-          pauseFor: 900,
-          skipAddStyles: true,
-          autoStart: true,
-          loop: false,
-        }}
-      /> */
 
 const Generation = ({ selectedGen, generations }) => {
   let data = generations.find((gen) => gen.id === selectedGen);
@@ -292,8 +264,8 @@ const Generation = ({ selectedGen, generations }) => {
           sx={{
             display: "flex",
             flexDirection: "column",
-            py: {xs:10,md:12},
-            px: {xs:4,md:8},
+            py: { xs: 10, md: 12 },
+            px: { xs: 4, md: 8 },
             alignItems: "center",
             background: "url(http://unsplash.it/2000/1100)",
             backgroundRepeat: "no-repeat",
@@ -313,7 +285,7 @@ const Generation = ({ selectedGen, generations }) => {
                 colorScheme === "dark"
                   ? darkColorScheme[1]
                   : lightColorScheme[1],
-              width: {xs: '100%', md: 'auto'}
+              width: { xs: "100%", md: "auto" },
             }}
           >
             <Typography

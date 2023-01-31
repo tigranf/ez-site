@@ -114,7 +114,7 @@ function ResponsiveDrawer(props) {
           disablePadding
           dense
           sx={{
-            mb:3,
+            mb: 3,
             filter: "brightness(75%)",
             ":hover": { filter: "brightness(105%)" },
           }}
@@ -340,7 +340,7 @@ function ResponsiveDrawer(props) {
           return theme.palette.mode === "dark"
             ? {
                 flexGrow: 1,
-                width: `calc(100% - ${drawerWidth}px)` ,
+                width: `calc(100% - ${drawerWidth}px)`,
                 minHeight: "calc(100vh - 48px)",
                 backgroundImage: "url('/images/stacked-waves-haikei-1.svg')",
                 backgroundRepeat: "no-repeat",
@@ -348,7 +348,7 @@ function ResponsiveDrawer(props) {
               }
             : {
                 flexGrow: 1,
-                width: `calc(100% - ${drawerWidth}px)` ,
+                width: `calc(100% - ${drawerWidth}px)`,
                 minHeight: "calc(100vh - 48px)",
                 backgroundImage: "url('/images/stacked-waves-haikei-2.svg')",
                 backgroundRepeat: "no-repeat",
