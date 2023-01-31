@@ -114,6 +114,7 @@ function ResponsiveDrawer(props) {
           disablePadding
           dense
           sx={{
+            mb:3,
             filter: "brightness(75%)",
             ":hover": { filter: "brightness(105%)" },
           }}

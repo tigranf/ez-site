@@ -2,6 +2,7 @@ import { Box, Grid, Typography, Button } from "@mui/material";
 import ArrowForwardSharpIcon from "@mui/icons-material/ArrowForwardSharp";
 import { Link } from "react-router-dom";
 import AnimatedPage from "../Components/AnimatedPage";
+import { RateReviewSharp } from "@mui/icons-material";
 
 const Home = () => {
   return (
@@ -32,10 +33,14 @@ const Home = () => {
                 Create Simple Websites Instantly
               </Typography>
               <Typography variant="h6">
-                Welcome to EZ Site! We are the premier website for automatically
-                generating simple websites with AI generated content. Our goal
-                is to provide an easy way for people to create websites with
-                minimal effort and time required.
+                Welcome to{" "}
+                <span style={{ color: "#46B4F6", fontSize: "24px" }}>
+                  EZ Site <RateReviewSharp color="primary" fontSize="large" sx={{mr:1}} />
+                </span>
+                !<br /> We are the premier website for automatically generating
+                simple websites with AI generated content. Our goal is to
+                provide an easy way for people to create websites with minimal
+                effort and time required.
               </Typography>
               <Link style={{ textDecoration: "none" }} to="/register">
                 <Button
@@ -51,18 +56,20 @@ const Home = () => {
             </Box>
           </Grid>
           <Grid item xs={12} md={5} sx={{ overflow: "hidden" }}>
-            <img
-              src="http://unsplash.it/1520/1600"
-              srcSet="http://unsplash.it/1520/1600 2x"
-              alt="Random Hero"
-              style={{
-                filter: "saturate(40%) contrast(120%) brightness(70%)",
-                width: "100%",
-                height: "100%",
-                minWidth: 765,
-                minHeight: 800,
-              }}
-            />
+            <Grid item>
+              <img
+                src="http://unsplash.it/1520/1600"
+                srcSet="http://unsplash.it/1520/1600 2x"
+                alt="Random Hero"
+                style={{
+                  filter: "saturate(40%) contrast(120%) brightness(70%)",
+                  width: "100%",
+                  height: "100%",
+                  minWidth: 765,
+                  maxHeight: 785,
+                }}
+              />
+            </Grid>
           </Grid>
         </Grid>
       </Box>

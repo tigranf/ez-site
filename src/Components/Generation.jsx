@@ -104,7 +104,7 @@ const Generation = ({ selectedGen, generations }) => {
                 <Close fontSize="inherit" />
               </IconButton>
             }
-            sx={{ mb: 2, maxWidth: 600, lineHeight: 1.7, mx:'auto' }}
+            sx={{ mb: 2, maxWidth: 600, lineHeight: 1.7, mx: "auto" }}
           >
             Response is generated using OpenAI language processing models. As
             Artificial Intelligence (AI) technology continues to evolve, we are
@@ -132,77 +132,79 @@ const Generation = ({ selectedGen, generations }) => {
         </Typography>
         <Divider variant="middle" />
       </Box>
-      <Box sx={{ display: "flex", gap: 2, my: 4, flexWrap: "wrap" }}>
-        <Box sx={{ display: "flex", gap: 2 }}>
-          <Divider orientation="vertical" flexItem variant="fullWidth" />
-          <Box>
-            <Typography variant="h5">Header Font Style</Typography>
-            <Link target={"_blank"} href={headerFontStyle[0]}>
-              {headerFontStyle[1]}
-            </Link>
-          </Box>
-        </Box>
-        <Box sx={{ display: "flex", gap: 2 }}>
-          <Divider orientation="vertical" flexItem variant="fullWidth" />
-          <Box>
-            <Typography variant="h5">Main Font Style</Typography>
-            <Link target={"_blank"} href={mainFontStyle[0]}>
-              {mainFontStyle[1]}
-            </Link>
-          </Box>
-        </Box>
-      </Box>
-      <Box sx={{ display: "flex", gap: 2, flexWrap: "wrap" }}>
-        <Box>
-          <Typography variant="h5">Light Color Scheme</Typography>
-          <Box
-            sx={{
-              display: "flex",
-              gap: 2,
-              mb: 4,
-              bgcolor: "black",
-            }}
-          >
-            {lightColorScheme &&
-              lightColorScheme.map((color, i) => (
-                <Typography
-                  sx={{ color: lightColorScheme[i] }}
-                  key={i}
-                  variant="body1"
-                >
-                  {color}
-                </Typography>
-              ))}
-          </Box>
-        </Box>
-        <Box>
-          <Typography variant="h5">Dark Color Scheme</Typography>
-          <Box
-            sx={{
-              display: "flex",
-              gap: 2,
-              mb: 4,
-              bgcolor: "white",
-            }}
-          >
-            {darkColorScheme &&
-              darkColorScheme.map((color, i) => (
-                <Typography
-                  sx={{ color: darkColorScheme[i] }}
-                  key={i}
-                  variant="body1"
-                >
-                  {color}
-                </Typography>
-              ))}
-          </Box>
-        </Box>
-      </Box>
 
-      <Typography variant="h5">The Logo</Typography>
-      <Typography mb={4} color={"text.secondary"} variant="body1">
-        {logoDescription}
-      </Typography>
+      <Box sx={{ maxWidth: { sm: "60%" }, mx: "auto" }}>
+        <Box sx={{ display: "flex", gap: 2, my: 4, ml: -2, flexWrap: "wrap" }}>
+          <Box sx={{ display: "flex", gap: 2 }}>
+            <Divider orientation="vertical" flexItem variant="fullWidth" />
+            <Box>
+              <Typography variant="h5">Header Font Style</Typography>
+              <Link target={"_blank"} href={headerFontStyle[0]}>
+                {headerFontStyle[1]}
+              </Link>
+            </Box>
+          </Box>
+          <Box sx={{ display: "flex", gap: 2 }}>
+            <Divider orientation="vertical" flexItem variant="fullWidth" />
+            <Box>
+              <Typography variant="h5">Main Font Style</Typography>
+              <Link target={"_blank"} href={mainFontStyle[0]}>
+                {mainFontStyle[1]}
+              </Link>
+            </Box>
+          </Box>
+        </Box>
+        <Box sx={{ display: "flex", gap: 2, flexWrap: "wrap" }}>
+          <Box>
+            <Typography variant="h5">Light Color Scheme</Typography>
+            <Box
+              sx={{
+                display: "flex",
+                gap: 2,
+                mb: 4,
+                bgcolor: "black",
+              }}
+            >
+              {lightColorScheme &&
+                lightColorScheme.map((color, i) => (
+                  <Typography
+                    sx={{ color: lightColorScheme[i] }}
+                    key={i}
+                    variant="body1"
+                  >
+                    {color}
+                  </Typography>
+                ))}
+            </Box>
+          </Box>
+          <Box>
+            <Typography variant="h5">Dark Color Scheme</Typography>
+            <Box
+              sx={{
+                display: "flex",
+                gap: 2,
+                mb: 4,
+                bgcolor: "white",
+              }}
+            >
+              {darkColorScheme &&
+                darkColorScheme.map((color, i) => (
+                  <Typography
+                    sx={{ color: darkColorScheme[i] }}
+                    key={i}
+                    variant="body1"
+                  >
+                    {color}
+                  </Typography>
+                ))}
+            </Box>
+          </Box>
+        </Box>
+        <Typography variant="h5">The Logo</Typography>
+        <Typography mb={4} color={"text.secondary"} variant="body1">
+          {logoDescription}
+        </Typography>
+      </Box>
 
       <Paper
         elevation={0}
@@ -290,15 +292,14 @@ const Generation = ({ selectedGen, generations }) => {
           sx={{
             display: "flex",
             flexDirection: "column",
-            py: 12,
-            px: 8,
+            py: {xs:10,md:12},
+            px: {xs:4,md:8},
             alignItems: "center",
-            background: "url(http://unsplash.it/3000/1600)",
+            background: "url(http://unsplash.it/2000/1100)",
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundAttachment: "fixed",
-            backdropFilter: "contrast(40%)",
           }}
         >
           <Paper
@@ -312,6 +313,7 @@ const Generation = ({ selectedGen, generations }) => {
                 colorScheme === "dark"
                   ? darkColorScheme[1]
                   : lightColorScheme[1],
+              width: {xs: '100%', md: 'auto'}
             }}
           >
             <Typography
@@ -323,6 +325,7 @@ const Generation = ({ selectedGen, generations }) => {
               }
               variant="h3"
               textAlign={"center"}
+              sx={{ fontSize: { xs: "1.5rem", md: "2.2rem" } }}
             >
               {slogan}
             </Typography>
@@ -334,12 +337,12 @@ const Generation = ({ selectedGen, generations }) => {
                 sx={
                   colorScheme === "dark"
                     ? {
-                        fontSize: "16px",
+                        fontSize: { xs: "12px", md: "16px" },
                         bgcolor: darkColorScheme[2],
                         color: "black",
                       }
                     : {
-                        fontSize: "16px",
+                        fontSize: { xs: "12px", md: "16px" },
                         bgcolor: lightColorScheme[2],
                         color: "black",
                       }
