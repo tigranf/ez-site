@@ -1,6 +1,6 @@
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { Routes, Route, useLocation } from "react-router-dom";
-import { createContext, useEffect, useMemo, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import Home from "./Pages/Home";
 import Register from "./Pages/Register";
@@ -14,6 +14,7 @@ import { AnimatePresence } from "framer-motion";
 import { SnackbarProvider } from "notistack";
 import ChangePassword from "./Pages/ChangePassword";
 import { Box } from "@mui/material";
+import { useTheme } from "@emotion/react";
 
 export const UserContext = createContext();
 export const ColorModeContext = createContext({ toggleColorMode: () => {} });
@@ -21,6 +22,7 @@ export const ColorModeContext = createContext({ toggleColorMode: () => {} });
 function App() {
   const [user, setUser] = useState(null);
   const location = useLocation();
+  const theme = useTheme();
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
@@ -42,16 +44,17 @@ function App() {
             minHeight: "100vh",
             display: "flex",
             flexDirection: "column",
-            mx:'auto'
           }}
         >
           <Navbar />
           <Box
             sx={{
               marginTop: 6,
-              overflowX: "hidden",
-              background: 'url(/images/blob-scene-2.svg)',
-              minHeight: 'calc(100vh - 140px)',
+              background: theme.palette.mode === 'dark' ? 'url(/images/blob-scene-2.svg)' : 'url(/images/blob-scene-2-l.svg)',
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              minHeight: 'calc(100vh - 134px)',
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",

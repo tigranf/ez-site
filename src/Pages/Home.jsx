@@ -2,17 +2,19 @@ import { Box, Grid, Typography, Button } from "@mui/material";
 import ArrowForwardSharpIcon from "@mui/icons-material/ArrowForwardSharp";
 import { Link } from "react-router-dom";
 import AnimatedPage from "../Components/AnimatedPage";
-import { RateReviewSharp } from "@mui/icons-material";
+import { PriorityHigh, RateReviewSharp } from "@mui/icons-material";
+import { useTheme } from "@emotion/react";
 
 const Home = () => {
+  const theme = useTheme();
   return (
     <AnimatedPage>
-      <Box sx={{ overflowX: "hidden", mx: 2 }}>
+      <Box sx={{ overflowX: "hidden", }}>
         <Grid container spacing={3} mx="auto">
           <Grid
             item
             xs={12}
-            md={5}
+            md={6}
             sx={{
               maxWidth: 700,
               display: "grid",
@@ -34,15 +36,20 @@ const Home = () => {
               </Typography>
               <Typography variant="h6">
                 Welcome to{" "}
-                <span style={{ color: "#46B4F6", fontSize: "24px" }}>
-                  EZ Site{" "}
-                  <RateReviewSharp
-                    color="primary"
+                <span
+                  style={{
+                    color: theme.palette.primary.dark,
+                    fontSize: "24px",
+                  }}
+                >
+                  EZ Site <RateReviewSharp color="primary" fontSize="large" />
+                  <PriorityHigh
+                    color="action"
                     fontSize="large"
-                    sx={{ mr: 1 }}
+                    sx={{ ml: -1, mb: -0.5 }}
                   />
                 </span>
-                !<br /> We are the premier website for automatically generating
+                <br /> We are the premier website for automatically generating
                 simple websites with AI generated content. Our goal is to
                 provide an easy way for people to create websites with minimal
                 effort and time required.
@@ -60,7 +67,12 @@ const Home = () => {
               </Link>
             </Box>
           </Grid>
-          <Grid item xs={12} md={7} sx={{ overflow: "hidden", display: {xs: 'none', md: 'block'} }}>
+          <Grid
+            item
+            xs={12}
+            md={6}
+            sx={{ overflow: "hidden", display: { xs: "none", md: "block" } }}
+          >
             <Grid item>
               <img
                 src="/images/computer-website-3d.png"

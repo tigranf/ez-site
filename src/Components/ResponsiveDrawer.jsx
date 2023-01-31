@@ -218,7 +218,7 @@ function ResponsiveDrawer(props) {
                   sx={() => {
                     return gen.id === selectedGen
                       ? {
-                          filter: "brightness(100%)",
+                          filter: "brightness(105%)",
                           color: "hsl(272, 63%, 55%)",
                           transition: "all",
                           ":hover": {
@@ -237,7 +237,7 @@ function ResponsiveDrawer(props) {
                       <WebAssetIcon />
                     </ListItemIcon>
                     <ListItemText
-                      primary={gen.title}
+                      primary={gen.title ? gen.title : "( Feeling Lucky )"}
                       sx={{
                         display: "-webkit-box",
                         WebkitLineClamp: 3,
