@@ -7,8 +7,6 @@ import { Link, useNavigate } from "react-router-dom";
 import AnimatedPage from "../Components/AnimatedPage";
 import { useSnackbar } from "notistack";
 
-let unavailableNames = ["admin", "test", "moderator", "user", "tigran"];
-
 const Login = () => {
   const [clear, setClear] = useState(false);
   const [invalid, setInvalid] = useState(true);
@@ -28,9 +26,7 @@ const Login = () => {
       (password.length > 0 &&
         (password.length < 8 ||
           !/\d/.test(password) ||
-          !/[A-Z]/.test(password))) ||
-      (username.length > 0 &&
-        unavailableNames.some((name) => name === username))
+          !/[A-Z]/.test(password)))
     )
       setInvalid(true);
     else if (password.length > 0 && username.length > 0) setInvalid(false);

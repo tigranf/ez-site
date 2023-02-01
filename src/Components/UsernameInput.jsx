@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { Paper, Stack, ListItem } from "@mui/material";
+import { useLocation } from "react-router-dom";
 
 let unavailableNames = ["admin", "test", "moderator", "user", "tigran"];
 
@@ -9,16 +10,19 @@ const UsernameInput = ({ clearClick, handleUsername }) => {
   const [userName, setUserName] = useState("");
   const [color, setColor] = useState("secondary");
 
+  const location = useLocation();
+
   useEffect(() => {
     if (
       userName.length > 0 &&
-      unavailableNames.some((name) => name === userName)
+      unavailableNames.some((name) => name === userName) &&
+      location.pathname !== "/login"
     ) {
       setColor("error");
     } else if (userName.length > 0) {
       setColor("secondary");
     }
-  }, [userName]);
+  }, [location.pathname, userName]);
 
   useEffect(() => {
     if (clearClick) setUserName("");
@@ -42,17 +46,18 @@ const UsernameInput = ({ clearClick, handleUsername }) => {
         autoComplete="off"
         required={true}
       />
-      {unavailableNames.some((name) => name === userName) && (
-        <Paper elevation={8}>
-          <Stack spacing={0.5}>
-            <ListItem>
-              <Typography variant="caption">
-                This username is not available.
-              </Typography>
-            </ListItem>
-          </Stack>
-        </Paper>
-      )}
+      {unavailableNames.some((name) => name === userName) &&
+        location.pathname !== "/login" && (
+          <Paper elevation={8}>
+            <Stack spacing={0.5}>
+              <ListItem>
+                <Typography variant="caption">
+                  This username is not available.
+                </Typography>
+              </ListItem>
+            </Stack>
+          </Paper>
+        )}
     </>
   );
 };
