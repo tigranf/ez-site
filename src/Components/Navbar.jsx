@@ -11,12 +11,12 @@ import {
 } from "@mui/material";
 import RateReviewSharpIcon from "@mui/icons-material/RateReviewSharp";
 import { UserContext, ColorModeContext } from "../App";
-import { Brightness3, Brightness7 } from "@mui/icons-material";
+import { Brightness3, Brightness7, Login } from "@mui/icons-material";
 
 const Navbar = () => {
   const theme = useTheme();
   const colorMode = useContext(ColorModeContext);
-  const { user, setUser } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -29,18 +29,33 @@ const Navbar = () => {
             component="div"
             sx={{
               flexGrow: 1,
-              display: { xs: "none", sm: "block" },
-              mx: 4,
+              maxWidth: 1200,
+              mx: "auto",
+              fontSize: { xs: 16, sm: 24 },
             }}
           >
             <Box
-              sx={{ maxWidth: 120, cursor: "pointer" }}
+              sx={{
+                maxWidth: 120,
+                cursor: "pointer",
+              }}
               onClick={() => navigate("/")}
             >
-              EZ Site <RateReviewSharpIcon color="primary" fontSize="large" />
+              EZ Site{" "}
+              <RateReviewSharpIcon
+                color="primary"
+                sx={{ fontSize: { xs: 16, sm: 24 } }}
+              />
             </Box>
           </Typography>
-          <Box sx={{ display: "flex", alignItems: "center", gap: 4, mx: 4 }}>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: { xs: 2, sm: 4 },
+              mx: "auto",
+            }}
+          >
             {["Home"].map((item) => (
               <NavLink
                 end
@@ -49,7 +64,7 @@ const Navbar = () => {
                 style={({ isActive }) => {
                   return isActive
                     ? {
-                        color: "blueviolet",
+                        color: "#CA91D8",
                         textDecoration: "none",
                         scale: "1.2",
                       }
@@ -62,7 +77,7 @@ const Navbar = () => {
                 <Typography
                   variant="button"
                   sx={{
-                    fontSize: 16,
+                    fontSize: {xs: 12, sm: 16},
                     fontWeight: "bold",
                   }}
                 >
@@ -74,9 +89,18 @@ const Navbar = () => {
               onClick={() => navigate("/login")}
               color="secondary"
               variant="outlined"
+              endIcon={<Login />}
+              sx={{ display: { xs: "none", sm: "flex" } }}
             >
               Login
             </Button>
+            <IconButton
+              onClick={() => navigate("/login")}
+              color="secondary"
+              sx={{ display: { xs: "block", sm: "none" } }}
+            >
+              <Login />
+            </IconButton>
             <IconButton onClick={colorMode.toggleColorMode}>
               {theme.palette.mode === "dark" ? (
                 <Brightness7 />
@@ -93,22 +117,32 @@ const Navbar = () => {
       <AppBar component="nav" color="default">
         <Toolbar variant="dense">
           <Typography
-            variant="h5"
+            variant={"h5"}
             component="div"
             sx={{
               flexGrow: 1,
-              display: { xs: "none", sm: "block" },
-              mx: 4,
+              maxWidth: 1200,
+              mx: "auto",
+              fontSize: { xs: 16, sm: 24 },
             }}
           >
             <Box
-              sx={{ maxWidth: 120, cursor: "pointer" }}
+              sx={{
+                maxWidth: 120,
+                cursor: "pointer",
+              }}
               onClick={() => navigate("/")}
             >
-              EZ Site <RateReviewSharpIcon color="primary" fontSize="large" />
+              EZ Site{" "}
+              <RateReviewSharpIcon
+                color="primary"
+                sx={{ fontSize: { xs: 18, sm: 28 } }}
+              />
             </Box>
           </Typography>
-          <Box sx={{ display: "flex", alignItems: "center", gap: 4, mx: 4 }}>
+          <Box
+            sx={{ display: "flex", alignItems: "center", gap: 4, mx: "auto" }}
+          >
             {["Home", "App"].map((item) => (
               <NavLink
                 end
@@ -117,7 +151,7 @@ const Navbar = () => {
                 style={({ isActive }) => {
                   return isActive
                     ? {
-                        color: "blueviolet",
+                        color: "#CA91D8",
                         textDecoration: "none",
                         scale: "1.2",
                       }
@@ -130,7 +164,7 @@ const Navbar = () => {
                 <Typography
                   variant="button"
                   sx={{
-                    fontSize: 16,
+                    fontSize: {xs: 12, sm: 16},
                     fontWeight: "bold",
                   }}
                 >
@@ -138,7 +172,7 @@ const Navbar = () => {
                 </Typography>
               </NavLink>
             ))}
-            <Button
+            {/* <Button
               color="secondary"
               variant="outlined"
               onClick={async () => {
@@ -164,7 +198,7 @@ const Navbar = () => {
               }}
             >
               Logout
-            </Button>
+            </Button> */}
             <IconButton onClick={colorMode.toggleColorMode}>
               {theme.palette.mode === "dark" ? (
                 <Brightness7 />
