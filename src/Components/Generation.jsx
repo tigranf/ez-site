@@ -3,6 +3,7 @@ import {
   Brightness3,
   Brightness7,
   Close,
+  CopyAll,
   Menu,
   Send,
   SmartToy,
@@ -21,8 +22,11 @@ import {
   Link,
   Paper,
   Toolbar,
+  Tooltip,
   Typography,
+  Zoom,
 } from "@mui/material";
+import { useSnackbar } from "notistack";
 import React, { useState } from "react";
 import TypewriterComponent from "typewriter-effect";
 
@@ -43,6 +47,8 @@ const Generation = ({ selectedGen, generations }) => {
 
   const [colorScheme, setColorScheme] = useState("dark");
   const [open, setOpen] = React.useState(true);
+
+  const { enqueueSnackbar } = useSnackbar();
 
   return (
     <Paper
@@ -132,20 +138,45 @@ const Generation = ({ selectedGen, generations }) => {
             <Box
               sx={{
                 display: "flex",
+                flexWrap: "wrap",
                 gap: 2,
                 mb: 4,
-                bgcolor: "black",
+                pt: 1,
+                borderRadius: 2,
               }}
             >
               {lightColorScheme &&
                 lightColorScheme.map((color, i) => (
-                  <Typography
-                    sx={{ color: lightColorScheme[i] }}
-                    key={i}
-                    variant="body1"
-                  >
-                    {color}
-                  </Typography>
+                  <Tooltip key={i} title="Copy">
+                    <Button
+                      sx={{
+                        bgcolor: "black",
+                      }}
+                      variant="outlined"
+                      color="info"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        navigator.clipboard.writeText(color);
+                        enqueueSnackbar(`Copied ${color}.`, {
+                          variant: "success",
+                          anchorOrigin: {
+                            horizontal: "center",
+                            vertical: "top",
+                          },
+                          autoHideDuration: 2000,
+                          TransitionComponent: Zoom,
+                          action: <CopyAll />,
+                        });
+                      }}
+                    >
+                      <Typography
+                        sx={{ color: lightColorScheme[i], cursor: "pointer" }}
+                        variant="body1"
+                      >
+                        {color}
+                      </Typography>
+                    </Button>
+                  </Tooltip>
                 ))}
             </Box>
           </Box>
@@ -154,29 +185,77 @@ const Generation = ({ selectedGen, generations }) => {
             <Box
               sx={{
                 display: "flex",
+                flexWrap: "wrap",
                 gap: 2,
                 mb: 4,
-                bgcolor: "white",
+                pt: 1,
+                borderRadius: 2,
               }}
             >
               {darkColorScheme &&
                 darkColorScheme.map((color, i) => (
-                  <Typography
-                    sx={{ color: darkColorScheme[i] }}
-                    key={i}
-                    variant="body1"
-                  >
-                    {color}
-                  </Typography>
+                  <Tooltip key={i} title="Copy">
+                    <Button
+                      sx={{
+                        bgcolor: "white",
+                      }}
+                      variant="outlined"
+                      color="info"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        navigator.clipboard.writeText(color);
+                        enqueueSnackbar(`Copied ${color}.`, {
+                          variant: "success",
+                          anchorOrigin: {
+                            horizontal: "center",
+                            vertical: "top",
+                          },
+                          autoHideDuration: 2000,
+                          TransitionComponent: Zoom,
+                          action: <CopyAll />,
+                        });
+                      }}
+                    >
+                      <Typography
+                        sx={{ color: darkColorScheme[i] }}
+                        key={i}
+                        variant="body1"
+                      >
+                        {color}
+                      </Typography>
+                    </Button>
+                  </Tooltip>
                 ))}
             </Box>
           </Box>
         </Box>
-        <Typography variant="h5">The Logo</Typography>
-        <Typography mb={4} color={"text.secondary"} variant="body1">
-          {logoDescription}
-        </Typography>
+        <Tooltip title="Copy">
+          <Box
+            sx={{ cursor: "copy" }}
+            onClick={(e) => {
+              e.preventDefault();
+              navigator.clipboard.writeText(logoDescription);
+              enqueueSnackbar(`Copied the logo description.`, {
+                variant: "success",
+                anchorOrigin: {
+                  horizontal: "center",
+                  vertical: "top",
+                },
+                autoHideDuration: 2000,
+                TransitionComponent: Zoom,
+                action: <CopyAll />,
+              });
+            }}
+          >
+            <Typography variant="h5">The Logo</Typography>
+            <Typography mb={4} color={"text.secondary"} variant="body1">
+              {logoDescription}
+            </Typography>
+          </Box>
+        </Tooltip>
       </Box>
+
+      {/*--------------------- TEMPLATE AREA ------------------------------*/}
 
       <Paper
         elevation={0}
@@ -311,7 +390,7 @@ const Generation = ({ selectedGen, generations }) => {
                     ? {
                         fontSize: { xs: "12px", md: "16px" },
                         bgcolor: darkColorScheme[2],
-                        color: "black",
+                        color: "white",
                       }
                     : {
                         fontSize: { xs: "12px", md: "16px" },
@@ -370,7 +449,7 @@ const Generation = ({ selectedGen, generations }) => {
                     colorScheme === "dark"
                       ? darkColorScheme[2]
                       : lightColorScheme[2],
-                  color: "black",
+                  color: colorScheme === "dark" ? "white" : "black",
                 }}
                 size="small"
               >
@@ -410,7 +489,7 @@ const Generation = ({ selectedGen, generations }) => {
                     colorScheme === "dark"
                       ? darkColorScheme[2]
                       : lightColorScheme[2],
-                  color: "black",
+                  color: colorScheme === "dark" ? "white" : "black",
                 }}
                 size="small"
               >
@@ -450,7 +529,7 @@ const Generation = ({ selectedGen, generations }) => {
                     colorScheme === "dark"
                       ? darkColorScheme[2]
                       : lightColorScheme[2],
-                  color: "black",
+                  color: colorScheme === "dark" ? "white" : "black",
                 }}
                 size="small"
               >
