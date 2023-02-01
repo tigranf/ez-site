@@ -219,7 +219,7 @@ function ResponsiveDrawer(props) {
                     return gen.id === selectedGen
                       ? {
                           filter: "brightness(105%)",
-                          color: "hsl(272, 63%, 55%)",
+                          color: "hsl(288, 70%, 66%)",
                           transition: "all",
                           ":hover": {
                             filter: "brightness(90%)",
