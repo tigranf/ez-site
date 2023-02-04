@@ -75,7 +75,7 @@ const Home = () => {
           >
             <Grid item>
               <img
-                src="/images/computer-website-3d.png"
+                src="/images/computer-website-3d.webp"
                 alt="3D render of computer with abstract art coming out of the screen"
                 style={{
                   filter:
