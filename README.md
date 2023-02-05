@@ -12,7 +12,7 @@ These instructions will get you a copy of the project up and running on your loc
 You will need to have Node.js, Express, and PostgreSQL installed on your local machine.
 
 ### Installation
-1. Clone the repository to your local machine using `git clone https://github.com/<username>/ez-site.git`
+1. Clone the repository to your local machine using `git clone https://github.com/tigranf/ez-site`
 2. Navigate to the project directory using the terminal and run `npm install` to install the necessary dependencies.
 3. Run `npm start` to start the local react development server.
 4. Run `node API/Server.js` to start the local express server.
