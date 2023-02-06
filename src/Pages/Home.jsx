@@ -2,29 +2,30 @@ import { Box, Grid, Typography, Button } from "@mui/material";
 import ArrowForwardSharpIcon from "@mui/icons-material/ArrowForwardSharp";
 import { Link } from "react-router-dom";
 import AnimatedPage from "../Components/AnimatedPage";
-import { PriorityHigh, RateReviewSharp } from "@mui/icons-material";
+import { PriorityHigh } from "@mui/icons-material";
 import { useTheme } from "@emotion/react";
 
 const Home = () => {
   const theme = useTheme();
   return (
     <AnimatedPage>
-      <Box sx={{ overflowX: "hidden" }}>
-        <Grid container spacing={3} mx="auto">
+      <Box sx={{ overflowX: "hidden", maxWidth: 1200, mx: 'auto', mb: 8 }}>
+        <Grid container spacing={{xs:1,md:3}} direction={{xs: 'column-reverse', sm: 'row'}} >
           <Grid
             item
-            xs={12}
+            xs={10}
             md={6}
             sx={{
               maxWidth: 700,
               display: "grid",
               placeItems: "center",
+              mx: "auto",
             }}
           >
             <Box
               sx={{
-                px: 4,
-                py: 6,
+                px: 2,
+                py: {xs: 1, md: 6},
                 gap: 2,
                 display: "grid",
                 alignContent: "center",
@@ -80,23 +81,25 @@ const Home = () => {
           </Grid>
           <Grid
             item
-            xs={12}
+            xs={8}
             md={6}
-            sx={{ overflow: "hidden", display: { xs: "none", md: "block" } }}
+            sx={{ overflow: "hidden", mx: "auto" }}
           >
-            <Grid item>
-              <img
-                src="/images/computer-website-3d.webp"
-                alt="3D render of computer with abstract art coming out of the screen"
-                style={{
-                  filter:
-                    theme.palette.mode === "dark"
-                      ? "saturate(40%) contrast(120%) brightness(75%)"
-                      : "",
-                  minWidth: 765,
-                  maxHeight: 785,
-                }}
-              />
+            <Grid item sx={{px:{xs:10, md:2}, py:1}}>
+              <Box sx={{objectFit: 'scale-down'}}>
+                <img
+                  src="/images/computer-website-3d.webp"
+                  alt="3D render of computer with abstract art coming out of the screen"
+                  style={{
+                    filter:
+                      theme.palette.mode === "dark"
+                        ? "saturate(40%) contrast(120%) brightness(75%)"
+                        : "",
+                        width: "100%",
+                  }}
+                />
+              </Box>
+
             </Grid>
           </Grid>
         </Grid>

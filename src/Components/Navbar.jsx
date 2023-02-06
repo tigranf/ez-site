@@ -9,7 +9,6 @@ import {
   IconButton,
   useTheme,
 } from "@mui/material";
-import RateReviewSharpIcon from "@mui/icons-material/RateReviewSharp";
 import { UserContext, ColorModeContext } from "../App";
 import { Brightness3, Brightness7, Login } from "@mui/icons-material";
 
@@ -46,10 +45,6 @@ const Navbar = () => {
               onClick={() => navigate("/")}
             >
               EZ Site{" "}
-              {/* <RateReviewSharpIcon
-                color="primary"
-                sx={{ fontSize: { xs: 16, sm: 24 } }}
-              /> */}
               <img
                 src="/favicon.ico"
                 alt="EZ Site Logo"
@@ -111,7 +106,7 @@ const Navbar = () => {
             <IconButton
               onClick={() => navigate("/login")}
               color="secondary"
-              sx={{ display: { xs: "block", sm: "none" } }}
+              sx={{ display: { xs: "flex", sm: "none" } }}
             >
               <Login />
             </IconButton>

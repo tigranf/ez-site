@@ -81,7 +81,7 @@ const Login = () => {
           width: "100%",
           height: "100%",
           mx: "auto",
-          my: 12,
+          my: 'auto',
         }}
       >
         <Typography variant="h4" component="div" textAlign={"center"}>
@@ -98,7 +98,7 @@ const Login = () => {
             }
           }}
         >
-          <Stack spacing={2} width={"65%"} mx={"auto"}>
+          <Stack spacing={2} width={"85%"} mx={"auto"}>
             <UsernameInput
               clearClick={clear}
               handleUsername={(username) => setUsername(username)}
@@ -130,8 +130,8 @@ const Login = () => {
               </Button>
             </Box>
             <Box>
-              <Typography>
-                Don't have an account?{" "}
+              <Typography textAlign={'center'}>
+                Don't have an account?{" "}<br />
                 <Link to="/register" style={{ textDecoration: "none" }}>
                   <Button variant="text" size="small">
                     Click here
