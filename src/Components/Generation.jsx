@@ -421,7 +421,7 @@ const Generation = ({ selectedGen, generations }) => {
             elevation={6}
             sx={{
               minWidth: 275,
-              maxWidth: "80%",
+              maxWidth: 800,
               bgcolor:
                 colorScheme === "dark"
                   ? darkColorScheme[0]
@@ -461,7 +461,7 @@ const Generation = ({ selectedGen, generations }) => {
             elevation={6}
             sx={{
               minWidth: 275,
-              maxWidth: "80%",
+              maxWidth: 800,
               bgcolor:
                 colorScheme === "dark"
                   ? darkColorScheme[0]
@@ -501,7 +501,7 @@ const Generation = ({ selectedGen, generations }) => {
             elevation={6}
             sx={{
               minWidth: 275,
-              maxWidth: "80%",
+              maxWidth: 800,
               bgcolor:
                 colorScheme === "dark"
                   ? darkColorScheme[0]
