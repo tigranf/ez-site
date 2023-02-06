@@ -42,7 +42,18 @@ const Home = () => {
                     fontSize: "24px",
                   }}
                 >
-                  EZ Site <RateReviewSharp color="primary" fontSize="large" />
+                  EZ Site
+                  <img
+                    src="/favicon.ico"
+                    alt="EZ Site Logo"
+                    width={30}
+                    height={30}
+                    style={{
+                      background: "hsl(255,0%,0%,0.2)",
+                      borderRadius: "50%",
+                      translate: "2px 4px",
+                    }}
+                  />
                   <PriorityHigh
                     color="action"
                     fontSize="large"

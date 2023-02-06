@@ -38,13 +38,27 @@ const Navbar = () => {
               sx={{
                 maxWidth: 120,
                 cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: 1,
               }}
               onClick={() => navigate("/")}
             >
               EZ Site{" "}
-              <RateReviewSharpIcon
+              {/* <RateReviewSharpIcon
                 color="primary"
                 sx={{ fontSize: { xs: 16, sm: 24 } }}
+              /> */}
+              <img
+                src="/favicon.ico"
+                alt="EZ Site Logo"
+                width={30}
+                height={30}
+                style={{
+                  background: "hsl(255,0%,0%,0.2)",
+                  borderRadius: "50%",
+                }}
               />
             </Box>
           </Typography>
@@ -77,7 +91,7 @@ const Navbar = () => {
                 <Typography
                   variant="button"
                   sx={{
-                    fontSize: {xs: 12, sm: 16},
+                    fontSize: { xs: 12, sm: 16 },
                     fontWeight: "bold",
                   }}
                 >
@@ -130,13 +144,27 @@ const Navbar = () => {
               sx={{
                 maxWidth: 120,
                 cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: 1,
               }}
               onClick={() => navigate("/")}
             >
               EZ Site{" "}
-              <RateReviewSharpIcon
+              {/* <RateReviewSharpIcon
                 color="primary"
                 sx={{ fontSize: { xs: 18, sm: 28 } }}
+              /> */}
+              <img
+                src="/favicon.ico"
+                alt="EZ Site Logo"
+                width={30}
+                height={30}
+                style={{
+                  background: "hsl(255,0%,0%,0.2)",
+                  borderRadius: "50%",
+                }}
               />
             </Box>
           </Typography>
@@ -164,7 +192,7 @@ const Navbar = () => {
                 <Typography
                   variant="button"
                   sx={{
-                    fontSize: {xs: 12, sm: 16},
+                    fontSize: { xs: 12, sm: 16 },
                     fontWeight: "bold",
                   }}
                 >

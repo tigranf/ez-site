@@ -67,12 +67,23 @@ function ResponsiveDrawer(props) {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
+              gap: "10px",
               fontWeight: "bold",
               height: "100%",
               width: "100%",
             }}
           >
-            EZ Site <RateReviewSharpIcon color="primary" fontSize="large" />
+            EZ Site
+            <img
+              src="/favicon.ico"
+              alt="EZ Site Logo"
+              width={30}
+              height={30}
+              style={{
+                background: "hsl(255,0%,0%,0.2)",
+                borderRadius: "50%",
+              }}
+            />
           </Typography>
         </Box>
       </Toolbar>
@@ -289,10 +300,23 @@ function ResponsiveDrawer(props) {
               sx={{
                 flexGrow: 1,
                 display: { xs: "none", sm: "flex" },
+                alignItems: "center",
+                justifyContent: "center",
+                gap: 1,
                 fontWeight: "bold",
               }}
             >
-              EZ Site <RateReviewSharpIcon color="primary" fontSize="large" />
+              EZ Site
+              <img
+                src="/favicon.ico"
+                alt="EZ Site Logo"
+                width={30}
+                height={30}
+                style={{
+                  background: "hsl(255,0%,0%,0.2)",
+                  borderRadius: "50%",
+                }}
+              />
             </Typography>
           </Box>
         </Toolbar>
