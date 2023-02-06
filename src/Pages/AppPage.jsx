@@ -7,6 +7,7 @@ import {
   Zoom,
 } from "@mui/material";
 import { useSnackbar } from "notistack";
+import { motion } from "framer-motion";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../App";
@@ -16,10 +17,31 @@ import GenSkeleton from "../Components/GenSkeleton";
 import PromptBar from "../Components/PromptBar";
 import ResponsiveDrawer from "../Components/ResponsiveDrawer";
 
+const variants = {
+  flash: {
+    opacity: 0,
+    x: 10,
+    scale: 1.1,
+    transition: {
+      duration: 0.1,
+      repeat: 1,
+      repeatType: "reverse",
+      ease: [0.45, 1.64, 0.41, 0.98],
+    },
+  },
+  stop: {
+    opacity: 1,
+    x: 0,
+    scale: 1,
+    transition: { duration: 0.1 },
+  },
+};
+
 const AppPage = () => {
   const [generations, setGenerations] = useState(null);
   const [selectedGen, setSelectedGen] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+  const [genClicked, setGenClicked] = useState(false);
 
   const { user } = useContext(UserContext);
   const navigate = useNavigate();
@@ -166,9 +188,15 @@ const AppPage = () => {
         selectedGen={selectedGen}
         setSelectedGen={(gen) => setSelectedGen(gen)}
         isLoading={isLoading}
+        setGenClicked={setGenClicked}
       >
-        {isLoading && <LinearProgress color="info" />}
-        {content}
+        <motion.div
+          variants={variants}
+          animate={genClicked ? "flash" : "stop"}
+        >
+          {isLoading && <LinearProgress color="info" />}
+          {content}
+        </motion.div>
       </ResponsiveDrawer>
     </AnimatedPage>
   );

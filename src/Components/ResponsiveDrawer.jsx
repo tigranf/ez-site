@@ -11,7 +11,6 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
-import RateReviewSharpIcon from "@mui/icons-material/RateReviewSharp";
 import WebAssetIcon from "@mui/icons-material/WebAsset";
 import MeetingRoomIcon from "@mui/icons-material/MeetingRoom";
 import AddIcon from "@mui/icons-material/Add";
@@ -33,6 +32,7 @@ function ResponsiveDrawer(props) {
     selectedGen,
     setSelectedGen,
     isLoading,
+    setGenClicked,
   } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -177,6 +177,10 @@ function ResponsiveDrawer(props) {
           <ListItemButton
             divider={true}
             onClick={() => {
+              if (selectedGen === 0) {
+                setGenClicked(true);
+                setTimeout(() => setGenClicked(false), 5);
+              }
               setSelectedGen(0);
             }}
           >
